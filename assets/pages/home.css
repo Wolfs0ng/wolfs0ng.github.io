@@ -1,0 +1,6 @@
+/* Home page tweaks */
+.hero { padding-bottom: 18px; }
+.grid { gap: 18px; }
+
+.project .actions { margin-top: 16px; }
+.project .badges { margin-top: 10px; }
