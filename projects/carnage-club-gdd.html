@@ -31,8 +31,6 @@
 
             <div class="actions">
                 <a class="btn" href="/projects/carnage-club.html">← Проєкт</a>
-                <a class="btn" href="/docs/GDD.md" target="_blank" rel="noopener">Відкрити .md</a>
-                <a class="btn" href="/docs/GDD.md" download>Завантажити .md</a>
             </div>
         </div>
     </section>
@@ -48,6 +46,7 @@
 
 <script src="/assets/site.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     (async () => {
       const container = document.getElementById("gdd");
@@ -55,19 +54,20 @@
       const errText = document.getElementById("gddErrorText");
     
       try {
-        const res = await fetch("/docs/GDD.md", { cache: "no-cache" });
-        if (!res.ok) throw new Error(`HTTP ${res.status} while fetching /docs/GDD.md`);
+        const res = await fetch("/assets/docs/GDD.md", { cache: "no-cache" });
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status} while fetching /assets/docs/GDD.md`);
+        }
     
         const md = await res.text();
-    
-        // Render markdown -> HTML
         container.innerHTML = marked.parse(md);
     
-        // Basic safety: ensure external links open in new tab
+        // external links open in new tab
         container.querySelectorAll('a[href^="http"]').forEach(a => {
-          a.setAttribute("target", "_blank");
-          a.setAttribute("rel", "noopener");
+          a.target = "_blank";
+          a.rel = "noopener";
         });
+    
       } catch (e) {
         container.hidden = true;
         errBox.hidden = false;
