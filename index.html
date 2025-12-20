@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Project Hub</title>
+    <meta name="description" content="Project hub: Carnage Club and more." />
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header class="topbar">
+    <div class="wrap topbar__inner">
+        <a class="brand" href="index.html">Project Hub</a>
+        <nav class="nav">
+            <a class="nav__link is-active" href="index.html">Проєкти</a>
+            <a class="nav__link" href="showcase/code.html">Код</a>
+            <a class="nav__link" href="about/index.html">Контакти</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <section class="hero">
+        <h1>Проєкти</h1>
+        <p class="muted">
+            Стартова сторінка: обери проєкт → опис → скачати → при бажанні перейди до прикладів коду.
+        </p>
+    </section>
+
+    <section class="grid">
+        <article class="card project">
+            <div class="project__head">
+                <div>
+                    <h2 class="project__title">Carnage Club</h2>
+                    <p class="project__tagline">
+                        тактичний дуельний бойовик, де ти воюєш не з цифрами, а з розумом, який памʼятає тебе.
+                    </p>
+                </div>
+                <div class="badges">
+                    <span class="badge">Unity</span>
+                    <span class="badge">Mobile</span>
+                    <span class="badge">Adaptive AI</span>
+                </div>
+            </div>
+
+            <div class="project__media">
+                <!-- Замінити на свою картинку/гіф -->
+                <div class="media-placeholder">Hero image / GIF</div>
+            </div>
+
+            <ul class="list">
+                <li>4-напрямкова атака/захист + мульти-напрямки</li>
+                <li>Telemetry → Knowledge → Reaction Matrix (persistent)</li>
+                <li>Nemesis: вороги еволюціонують після перемог</li>
+            </ul>
+
+            <div class="actions">
+                <a class="btn primary" href="projects/carnage-club.html">Відкрити проєкт</a>
+                <a class="btn" href="showcase/code.html">Приклади коду</a>
+            </div>
+        </article>
+
+        <article class="card project is-disabled">
+            <div class="project__head">
+                <div>
+                    <h2 class="project__title">Next Project</h2>
+                    <p class="project__tagline muted">Слот під наступний проєкт (пізніше).</p>
+                </div>
+                <div class="badges">
+                    <span class="badge">TBD</span>
+                </div>
+            </div>
+            <div class="project__media">
+                <div class="media-placeholder">Coming soon</div>
+            </div>
+            <div class="actions">
+                <button class="btn" disabled>Скоро</button>
+            </div>
+        </article>
+    </section>
+
+    <footer class="footer">
+        <span class="muted">© <span id="y"></span></span>
+    </footer>
+</main>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
