@@ -11,18 +11,18 @@
 
 <header class="topbar">
     <div class="wrap topbar__inner">
-        <a class="brand" href="../index.html">Project Hub</a>
+        <a class="brand" href="index.html">Головна сторінка</a>
         <nav class="nav">
-            <a class="nav__link" href="../index.html">Проєкти</a>
-            <a class="nav__link is-active" href="codetemplates.html">CodeTemplates</a>
-            <a class="nav__link" href="../about/index.html">Контакти</a>
+            <a class="nav__link is-active" href="index.html">Проекти</a>
+            <a class="nav__link" href="../showcase/codetemplates.html">Приклади коду</a>
+            <a class="nav__link" href="about/index.html">Контакти</a>
         </nav>
     </div>
 </header>
 
 <main class="wrap">
     <section class="hero">
-        <h1>CodeTemplates</h1>
+        <h1>Приклади коду</h1>
         <p class="muted">
             Тут — список проєктів і коротко, <b>які саме рішення/системи</b> я публічно показую.
             Клікни на проєкт → відкриється окрема сторінка з кодом (витягами + поясненнями + GIF/скрінами).
@@ -31,10 +31,9 @@
 
     <section class="section">
         <h2>Проєкти</h2>
-
         <div class="codehub">
             <!-- Carnage Club -->
-            <a class="codehub__cardLink" href="carnageclubcode.html" aria-label="Open Carnage Club code templates">
+            <div class="codehub__card">
                 <div class="codehub__cardHead">
                     <div>
                         <div class="codehub__title">Carnage Club</div>
@@ -52,14 +51,19 @@
                 <div class="codehub__desc">
                     <div class="muted small">Що саме показано на сторінці коду:</div>
                     <ul class="list">
-                        <li><b>Telemetry</b>: збір дій та outcomes по напрямках (під AI/дебаг)</li>
-                        <li><b>Player Knowledge</b>: патерни, біграми/тріграми, rolling window</li>
-                        <li><b>AI Reaction Knowledge</b>: Action–Reaction Matrix + evaluators</li>
-                        <li><b>Persistence</b>: Unity-friendly SaveData DTO для knowledge шарів</li>
+                        <li><b>Telemetry</b>: збір дій та outcomes по напрямках</li>
+                        <li><b>Player Knowledge</b>: патерни, біграми/тріграми</li>
+                        <li><b>AI Reaction Knowledge</b>: Action–Reaction Matrix</li>
+                        <li><b>Persistence</b>: SaveData DTO</li>
                     </ul>
-                    <div class="codehub__hint muted small">Відкрити сторінку коду →</div>
                 </div>
-            </a>
+
+                <div class="actions">
+                    <a class="btn primary" href="carnageclubcode.html">
+                        Подивитись код
+                    </a>
+                </div>
+            </div>
 
             <!-- Next project placeholder -->
             <div class="card codehub__placeholder">
