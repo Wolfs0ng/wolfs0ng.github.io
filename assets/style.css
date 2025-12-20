@@ -51,3 +51,51 @@ a:hover{text-decoration:underline}
 
 .footer{padding:28px 0}
 .muted{color:var(--muted)}
+.codehub{
+    display:grid;
+    gap:16px;
+}
+
+.codehub__cardLink{
+    display:block;
+    border:1px solid var(--line);
+    border-radius:var(--r);
+    padding:18px;
+    background:linear-gradient(180deg, rgba(215,184,106,.08), rgba(18,18,26,0));
+    color:var(--text);
+    box-shadow:var(--shadow);
+}
+
+.codehub__cardLink:hover{
+    border-color:rgba(215,184,106,.40);
+    text-decoration:none;
+}
+
+.codehub__cardHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.codehub__title{
+    font-size:20px;
+    font-weight:800;
+}
+
+.codehub__subtitle{
+    margin-top:4px;
+}
+
+.codehub__desc{
+    margin-top:12px;
+}
+
+.codehub__hint{
+    margin-top:10px;
+}
+
+.codehub__placeholder{
+    opacity:.65;
+}

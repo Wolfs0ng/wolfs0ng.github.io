@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CodeTemplates</title>
+    <meta name="description" content="CodeTemplates hub: projects and which code slices are shown.">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar__inner">
+        <a class="brand" href="../index.html">Project Hub</a>
+        <nav class="nav">
+            <a class="nav__link" href="../index.html">Проєкти</a>
+            <a class="nav__link is-active" href="codetemplates.html">CodeTemplates</a>
+            <a class="nav__link" href="../about/index.html">Контакти</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <section class="hero">
+        <h1>CodeTemplates</h1>
+        <p class="muted">
+            Тут — список проєктів і коротко, <b>які саме рішення/системи</b> я публічно показую.
+            Клікни на проєкт → відкриється окрема сторінка з кодом (витягами + поясненнями + GIF/скрінами).
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Проєкти</h2>
+
+        <div class="codehub">
+            <!-- Carnage Club -->
+            <a class="codehub__cardLink" href="carnageclubcode.html" aria-label="Open Carnage Club code templates">
+                <div class="codehub__cardHead">
+                    <div>
+                        <div class="codehub__title">Carnage Club</div>
+                        <div class="codehub__subtitle muted">
+                            Telemetry → Knowledge → Reaction Matrix (persistent AI learning)
+                        </div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge">Unity</span>
+                        <span class="badge">AI</span>
+                        <span class="badge">Architecture</span>
+                    </div>
+                </div>
+
+                <div class="codehub__desc">
+                    <div class="muted small">Що саме показано на сторінці коду:</div>
+                    <ul class="list">
+                        <li><b>Telemetry</b>: збір дій та outcomes по напрямках (під AI/дебаг)</li>
+                        <li><b>Player Knowledge</b>: патерни, біграми/тріграми, rolling window</li>
+                        <li><b>AI Reaction Knowledge</b>: Action–Reaction Matrix + evaluators</li>
+                        <li><b>Persistence</b>: Unity-friendly SaveData DTO для knowledge шарів</li>
+                    </ul>
+                    <div class="codehub__hint muted small">Відкрити сторінку коду →</div>
+                </div>
+            </a>
+
+            <!-- Next project placeholder -->
+            <div class="card codehub__placeholder">
+                <div class="codehub__title">Next Project</div>
+                <p class="muted">
+                    Додаси наступний проєкт — зробиш ще одну сторінку типу <code>nextprojectcode.html</code>
+                    і додаси сюди ще одну картку.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a class="muted" href="../index.html">← Назад до проєктів</a>
+    </footer>
+</main>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

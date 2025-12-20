@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Carnage Club — Code</title>
+    <meta name="description" content="Carnage Club code templates: telemetry, knowledge bases, reaction matrix.">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="wrap topbar__inner">
+        <a class="brand" href="../index.html">Project Hub</a>
+        <nav class="nav">
+            <a class="nav__link" href="../index.html">Проєкти</a>
+            <a class="nav__link is-active" href="codetemplates.html">CodeTemplates</a>
+            <a class="nav__link" href="../about/index.html">Контакти</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <section class="hero hero--project">
+        <div>
+            <h1>Carnage Club — Code</h1>
+            <p class="lead">
+                Вітрина ключових систем: телеметрія бою → знання про гравця → реакційна памʼять AI.
+            </p>
+
+            <div class="actions">
+                <a class="btn" href="codetemplates.html">← До CodeTemplates</a>
+                <a class="btn" href="../projects/carnage-club.html">Сторінка проєкту</a>
+            </div>
+
+            <div class="badges">
+                <span class="badge">Telemetry</span>
+                <span class="badge">Knowledge</span>
+                <span class="badge">AI</span>
+                <span class="badge">SaveData</span>
+            </div>
+        </div>
+
+        <div class="media-placeholder">GIF/Screen: AI in action</div>
+    </section>
+
+    <section class="section">
+        <h2>1) Telemetry: Turn → Outcomes</h2>
+
+        <div class="grid grid--2">
+            <div class="card">
+                <ul class="list">
+                    <li>Фіксує вибір атак/захистів (multi-direction підтримка)</li>
+                    <li>Записує per-direction outcomes (hit/block/parry/crit/guardbreak)</li>
+                    <li>Зберігає snapshots до/після (HP/Guard)</li>
+                    <li>Людиночитні логи для дебагу поведінки AI</li>
+                </ul>
+            </div>
+            <div class="media-placeholder">GIF: battle + debug logs</div>
+        </div>
+
+        <pre class="code"><code>// IBattleTelemetryService (overview)
+BeginTurn(roundIndex, playerState, aiState)                 // capture before snapshots
+RecordTurnChoices(actor, attackDirs, defendDirs)            // store normalized choices
+RecordResolutionOutcomes(roundIndex, attacker, attackResults) // per-direction outcomes
+CompleteTurn(roundIndex, playerState, aiState)              // capture after snapshots + clear pending
+</code></pre>
+    </section>
+
+    <section class="section">
+        <h2>2) Player Battle Behavior Knowledge</h2>
+
+        <div class="grid grid--2">
+            <div class="card">
+                <ul class="list">
+                    <li>DirectionMask патерни атак/захистів</li>
+                    <li>Per-direction usage та per-pattern usage</li>
+                    <li>Біграми/тріграми між ходами (packed keys)</li>
+                    <li>History + rolling window</li>
+                    <li>SaveData/Restore + rebuild windows</li>
+                </ul>
+            </div>
+            <div class="media-placeholder">Screen: debug report</div>
+        </div>
+
+        <pre class="code"><code>// PlayerBattleBehaviourKnowledge (overview)
+ProcessTurn(BattleTurnTelemetry turn)
+CreateSaveData()
+RestoreFromSaveData()
+BuildDebugReport()
+</code></pre>
+    </section>
+
+    <section class="section">
+        <h2>3) AI Reaction Knowledge (Action–Reaction Matrix)</h2>
+
+        <div class="grid grid--2">
+            <div class="card">
+                <ul class="list">
+                    <li>Offense matrix: AI AttackDir × Player DefMask</li>
+                    <li>Defense matrix: Player AttackDir × AI DefMask</li>
+                    <li>AiReactionCellStats: uses, hit, blocked, parry, crit, guardbreak, damage sums</li>
+                    <li>Evaluators: best attack/defense з tuning і cold-start fallback</li>
+                    <li>Persistent layer: SaveData з packed keys</li>
+                </ul>
+            </div>
+            <div class="media-placeholder">GIF: AI adaptation moment</div>
+        </div>
+
+        <pre class="code"><code>// AiReactionKnowledge (overview)
+ProcessTurn(BattleTurnTelemetry turn)
+
+// Evaluators
+AiOffenseEvaluator.GetBestAttackDirectionAgainst(defMask)
+AiDefenseEvaluator.GetBestDefendMaskAgainst(playerAttackDir)
+</code></pre>
+    </section>
+
+    <footer class="footer">
+        <a class="muted" href="codetemplates.html">← Назад до CodeTemplates</a>
+    </footer>
+</main>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
