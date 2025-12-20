@@ -1,4 +1,4 @@
 (() => {
   const y = document.getElementById("y");
-  if (y) y.textContent = String(new Date().getFullYear());
+  if (y) y.textContent = new Date().getFullYear();
 })();

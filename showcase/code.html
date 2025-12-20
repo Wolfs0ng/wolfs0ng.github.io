@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Code Showcase</title>
-    <meta name="description" content="Code examples and system breakdown." />
-    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+
 <header class="topbar">
     <div class="wrap topbar__inner">
         <a class="brand" href="../index.html">Project Hub</a>
@@ -23,77 +23,87 @@
     <section class="hero">
         <h1>Приклади коду</h1>
         <p class="muted">
-            Тут — не весь репозиторій, а “вітрина”: ключові системи, короткі пояснення,
-            і де це видно в грі (скріни/гіф).
+            Ключові системи з різних проєктів. Це не повний репозиторій, а демонстрація підходів.
         </p>
     </section>
 
     <section class="section">
-        <h2>1) Telemetry: Turn → Outcomes</h2>
-        <div class="grid grid--2">
-            <div class="card">
-                <p class="muted small">Що робить:</p>
-                <ul class="list">
-                    <li>Фіксує вибір дій (атака/захист) для Player/AI</li>
-                    <li>Записує outcome по кожному напрямку</li>
-                    <li>Дає читабельні логи для дебагу</li>
-                </ul>
-            </div>
-            <div class="media-tile">
-                <div class="media-placeholder">GIF: debug / battle</div>
-            </div>
+        <h2>Проєкти</h2>
+        <div class="project-list">
+            <a href="#carnage" class="project-link is-active">Carnage Club</a>
         </div>
-
-        <pre class="code"><code>// вставиш фрагмент реального коду сюди
-// IBattleTelemetryService.BeginTurn(...)
-// RecordTurnChoices(...)
-// RecordResolutionOutcomes(...)
-</code></pre>
     </section>
 
-    <section class="section">
-        <h2>2) Player Behavior Knowledge: patterns & sequences</h2>
-        <div class="grid grid--2">
-            <div class="card">
-                <ul class="list">
-                    <li>DirectionMask патерни атак/захисту</li>
-                    <li>біграми/тріграми між ходами</li>
-                    <li>rolling window, статистика ефективності</li>
-                </ul>
-            </div>
-            <div class="media-tile">
-                <div class="media-placeholder">Screenshot: debug report</div>
-            </div>
-        </div>
+    <section id="carnage" class="section">
+        <h2>Carnage Club</h2>
 
-        <pre class="code"><code>// PlayerBattleBehaviourKnowledge.ProcessTurn(...)
-// CreateSaveData()/RestoreFromSaveData()
+        <section class="section">
+            <h3>Telemetry System</h3>
+            <div class="grid grid--2">
+                <div class="card">
+                    <ul class="list">
+                        <li>Фіксує дії гравця і AI</li>
+                        <li>Outcome по кожному напрямку</li>
+                        <li>Основа для навчання AI</li>
+                    </ul>
+                </div>
+                <div class="media-placeholder">Battle + Debug GIF</div>
+            </div>
+
+            <pre class="code"><code>
+// IBattleTelemetryService
+BeginTurn(...)
+RecordTurnChoices(...)
+RecordResolutionOutcomes(...)
+CompleteTurn(...)
 </code></pre>
-    </section>
+        </section>
 
-    <section class="section">
-        <h2>3) AI Reaction Matrix: best move against you</h2>
-        <div class="grid grid--2">
-            <div class="card">
-                <ul class="list">
-                    <li>offense: AI attackDir × player defendMask</li>
-                    <li>defense: player attackDir × AI defendMask</li>
-                    <li>оціночні функції + cold-start</li>
-                </ul>
+        <section class="section">
+            <h3>Player Behavior Knowledge</h3>
+            <div class="grid grid--2">
+                <div class="card">
+                    <ul class="list">
+                        <li>DirectionMask патерни</li>
+                        <li>Біграми / тріграми</li>
+                        <li>Persistent SaveData</li>
+                    </ul>
+                </div>
+                <div class="media-placeholder">Debug Stats</div>
             </div>
-            <div class="media-tile">
-                <div class="media-placeholder">GIF: AI adaptation moment</div>
-            </div>
-        </div>
 
-        <pre class="code"><code>// AiReactionKnowledge.ProcessTurn(...)
-// AiOffenseEvaluator.GetBestAttackDirectionAgainst(...)
-// AiDefenseEvaluator.GetBestDefendMaskAgainst(...)
+            <pre class="code"><code>
+// PlayerBattleBehaviourKnowledge
+ProcessTurn(...)
+CreateSaveData()
+RestoreFromSaveData()
 </code></pre>
+        </section>
+
+        <section class="section">
+            <h3>AI Reaction Matrix</h3>
+            <div class="grid grid--2">
+                <div class="card">
+                    <ul class="list">
+                        <li>Attack × Defend матриці</li>
+                        <li>Hit / Block / Damage статистика</li>
+                        <li>Best move evaluators</li>
+                    </ul>
+                </div>
+                <div class="media-placeholder">AI adapting GIF</div>
+            </div>
+
+            <pre class="code"><code>
+// AiReactionKnowledge
+ProcessTurn(...)
+AiOffenseEvaluator.GetBestAttackDirectionAgainst(...)
+AiDefenseEvaluator.GetBestDefendMaskAgainst(...)
+</code></pre>
+        </section>
     </section>
 
     <footer class="footer">
-        <a class="muted" href="../projects/carnage-club.html">← Назад до Carnage Club</a>
+        <a class="muted" href="../projects/carnage-club.html">← Назад до проєкту</a>
     </footer>
 </main>
 

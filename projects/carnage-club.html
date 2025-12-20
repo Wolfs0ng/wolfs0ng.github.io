@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Carnage Club</title>
-    <meta name="description" content="Carnage Club project page + download." />
-    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+
 <header class="topbar">
     <div class="wrap topbar__inner">
         <a class="brand" href="../index.html">Project Hub</a>
@@ -21,35 +21,33 @@
 
 <main class="wrap">
     <section class="hero hero--project">
-        <div class="hero__text">
+        <div>
             <h1>Carnage Club</h1>
             <p class="lead">
                 тактичний дуельний бойовик, де ти воюєш не з цифрами, а з розумом, який памʼятає тебе.
             </p>
+
             <div class="actions">
-                <!-- Замінити посилання на реальний файл/сторінку завантаження -->
-                <a class="btn primary" href="#" title="Add your download link">Скачати (APK/Build)</a>
+                <a class="btn primary" href="#">Скачати білд</a>
                 <a class="btn" href="../showcase/code.html">Подивитись код</a>
             </div>
+
             <div class="badges">
-                <span class="badge">Unity</span>
-                <span class="badge">Turn-based duel</span>
-                <span class="badge">Adaptive AI</span>
-                <span class="badge">Gothic</span>
+                <span class="badge">Turn-based</span>
+                <span class="badge">4 Directions</span>
+                <span class="badge">Persistent AI</span>
             </div>
         </div>
 
-        <div class="hero__media">
-            <div class="media-placeholder">Trailer / GIF / Screenshot</div>
-        </div>
+        <div class="media-placeholder">Trailer / Gameplay GIF</div>
     </section>
 
     <section class="section">
-        <h2>Що це за гра</h2>
+        <h2>Про гру</h2>
         <div class="card">
             <p>
-                Singleplayer mobile дуель із 4-напрямковою атакою та захистом. Вороги збирають телеметрію бою,
-                будують знання про твої звички та поступово адаптуються. Частина знань персистентна: “світ памʼятає”.
+                Singleplayer дуельний бойовик з адаптивним AI.
+                Вороги аналізують дії гравця, накопичують знання та використовують їх у майбутніх боях.
             </p>
         </div>
     </section>
@@ -58,51 +56,25 @@
         <div class="card">
             <h3>Core Loop</h3>
             <ol class="list">
-                <li>Топ-даун мапа з вузлами</li>
-                <li>Вибір вузла → бій / подія</li>
-                <li>Дуель: атака/захист по напрямках</li>
-                <li>AI оновлює знання → наступні бої стають “розумнішими”</li>
+                <li>Мапа з вузлами</li>
+                <li>Вибір бою</li>
+                <li>Дуель по напрямках</li>
+                <li>AI навчається</li>
             </ol>
         </div>
 
         <div class="card">
-            <h3>Що робить гру унікальною</h3>
+            <h3>Унікальність</h3>
             <ul class="list">
-                <li><b>Adaptive AI</b>: реагує на патерни гравця</li>
-                <li><b>Persistent learning</b>: знання зберігаються між сесіями</li>
-                <li><b>Nemesis</b>: вороги еволюціонують після перемог</li>
-                <li><b>Focus stat</b>: впливає на швидкість “читання” ворога</li>
+                <li>AI памʼятає гравця</li>
+                <li>Nemesis система</li>
+                <li>Focus стат впливає на AI</li>
             </ul>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2>Скріншоти / GIF</h2>
-        <div class="grid grid--3">
-            <div class="media-tile"><div class="media-placeholder">Screen 1</div></div>
-            <div class="media-tile"><div class="media-placeholder">Screen 2</div></div>
-            <div class="media-tile"><div class="media-placeholder">GIF 1</div></div>
-        </div>
-        <p class="muted small">Порада: GIF-и краще показують “фічу AI”, ніж статичні скріни.</p>
-    </section>
-
-    <section class="section">
-        <h2>Техніка (коротко)</h2>
-        <div class="card">
-            <ul class="list">
-                <li>Telemetry: запис дій і outcome по кожному напрямку</li>
-                <li>Player behavior knowledge: частоти, патерни, біграми/тріграми</li>
-                <li>AI reaction matrix: що працює проти яких захистів/атак</li>
-                <li>SaveData: Unity-friendly DTO, персистентність знань</li>
-            </ul>
-            <div class="actions">
-                <a class="btn" href="../showcase/code.html">Перейти до прикладів коду</a>
-            </div>
         </div>
     </section>
 
     <footer class="footer">
-        <a class="muted" href="../index.html">← Назад до проєктів</a>
+        <a class="muted" href="../index.html">← Назад</a>
     </footer>
 </main>
 
