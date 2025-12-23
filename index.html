@@ -13,12 +13,14 @@
 <body>
 <header class="site-header">
     <nav class="nav">
-        <a class="brand" href="#top">
-            <span data-i18n="ua">Головна</span>
-            <span data-i18n="en" hidden>Home</span>
-        </a>
-
-        <div class="lang" aria-label="Language switch">
+        <div class="nav-left">
+        </div>
+        
+        <div class="nav-right">
+            <a class="lang-btn projects-btn" href="projects.html">
+                <span data-i18n="ua">Проєкти</span>
+                <span data-i18n="en" hidden>Projects</span>
+            </a>
             <button class="lang-btn" data-lang="ua" type="button" aria-pressed="false">UA</button>
             <button class="lang-btn" data-lang="en" type="button" aria-pressed="false">EN</button>
         </div>
@@ -33,22 +35,20 @@
 
             <section class="section" id="about">
                 <h1>
-                    <span data-i18n="ua">Привіт! Я Дмитро</span>
-                    <span data-i18n="en" hidden>Hi! I’m Dmytro</span>
+                    <span data-i18n="ua">Привіт! Я Тарасенко Дмитро</span>
+                    <span data-i18n="en" hidden>Hi! I’m Tarasenko Dmytro</span>
                 </h1>
-
                 <p>
-          <span data-i18n="ua">
-            Lead Unity Developer з 13+ роками досвіду у розробці мобільних та PC-ігор різних жанрів.
-            Працюю на перетині архітектури, геймплейних систем і продакшену: від ідеї та прототипу — до релізу й live-підтримки.
-            Спеціалізуюся на побудові масштабованої архітектури, стабілізації великих кодових баз, оптимізації продуктивності та технічному лідерстві команд.
-          </span>
-
+                    <span data-i18n="ua">
+                        Lead Unity Developer з 13+ роками досвіду у розробці мобільних та PC-ігор різних жанрів.
+                        Працюю на перетині архітектури, геймплейних систем і продакшену: від ідеї та прототипу — до релізу й live-підтримки.
+                        Спеціалізуюся на побудові масштабованої архітектури, стабілізації великих кодових баз, оптимізації продуктивності та технічному лідерстві команд.
+                    </span>
                     <span data-i18n="en" hidden>
-            Lead Unity Developer with 13+ years of experience in developing mobile and PC games across multiple genres.
-            I work at the intersection of architecture, gameplay systems, and production — from concept and prototyping to release and live support.
-            I specialize in building scalable architectures, stabilizing large codebases, performance optimization, and providing technical leadership to development teams.
-          </span>
+                        Lead Unity Developer with 13+ years of experience in developing mobile and PC games across multiple genres.
+                        I work at the intersection of architecture, gameplay systems, and production — from concept and prototyping to release and live support.
+                        I specialize in building scalable architectures, stabilizing large codebases, performance optimization, and providing technical leadership to development teams.
+                    </span>
                 </p>
             </section>
 
@@ -106,11 +106,40 @@
                 </div>
             </section>
 
+            <section class="section" id="projects">
+                <h2>
+                    <span data-i18n="ua">Проєкти</span>
+                    <span data-i18n="en" hidden>Projects</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                      <span data-i18n="ua">
+                        Тут будуть приклади коду та технічних рішень з реальних проєктів.
+                        Архітектурні підходи, ігрові системи, оптимізація продуктивності та інші
+                        практичні приклади з комерційної розробки.
+                      </span>
+                
+                                        <span data-i18n="en" hidden>
+                        Here you will find code samples and technical solutions from real projects.
+                        Architecture approaches, gameplay systems, performance optimization,
+                        and other practical examples from commercial development.
+                      </span>
+                    </p>
+                    <div class="btn-row">
+                        <a class="btn" href="projects.html">
+                            <span data-i18n="ua">Відкрити проєкти</span>
+                            <span data-i18n="en" hidden>Open projects</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <footer class="footer">
-        <span>© <span id="year"></span>
-          <span data-i18n="ua">Дмитро</span>
-          <span data-i18n="en" hidden>Dmytro</span>
-        </span>
+                <span>© <span id="year"></span>
+                  <span data-i18n="ua">Тарасенко Дмитро</span>
+                  <span data-i18n="en" hidden>Tarasenko Dmytro</span>
+                </span>
             </footer>
         </div>
     </main>
@@ -118,58 +147,6 @@
     <aside aria-hidden="true" class="side side--right"></aside>
 </div>
 
-<script>
-    (function () {
-      const KEY = "site_lang";
-      const supported = new Set(["ua", "en"]);
-  
-      function setTitle(lang) {
-        document.title = lang === "ua" ? "Про мене — Дмитро" : "About — Dmytro";
-      }
-  
-      function setBrandAria(lang) {
-        const brand = document.querySelector(".brand");
-        if (!brand) return;
-        brand.setAttribute("aria-label", lang === "ua" ? "На початок" : "Back to top");
-      }
-  
-      function applyLang(lang) {
-        if (!supported.has(lang)) lang = "ua";
-  
-        // html lang attr (best practice: use actual "uk" for UA)
-        document.documentElement.lang = (lang === "ua") ? "uk" : "en";
-  
-        // show/hide translated nodes
-        document.querySelectorAll("[data-i18n]").forEach(el => {
-          el.hidden = el.getAttribute("data-i18n") !== lang;
-        });
-  
-        // buttons state
-        document.querySelectorAll(".lang-btn").forEach(btn => {
-          const isActive = btn.dataset.lang === lang;
-          btn.classList.toggle("is-active", isActive);
-          btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
-  
-        setTitle(lang);
-        setBrandAria(lang);
-  
-        localStorage.setItem(KEY, lang);
-      }
-  
-      const urlLang = new URLSearchParams(location.search).get("lang");
-      const saved = localStorage.getItem(KEY);
-      const browser = (navigator.language || "uk").toLowerCase().startsWith("uk") ? "ua" : "en";
-  
-      const initial = supported.has(urlLang) ? urlLang : (supported.has(saved) ? saved : browser);
-      applyLang(initial);
-  
-      document.querySelectorAll(".lang-btn").forEach(btn => {
-        btn.addEventListener("click", () => applyLang(btn.dataset.lang));
-      });
-  
-      document.getElementById("year").textContent = new Date().getFullYear();
-    })();
-</script>
+<script src="assets/js/i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+    <!-- Title will be set by JS based on language -->
+    <title>Projects — Dmytro</title>
+
+    <link href="styles.css" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <!-- Back to home -->
+        <a class="brand" href="index.html">
+            <span data-i18n="ua">Назад</span>
+            <span data-i18n="en" hidden>Back</span>
+        </a>
+
+        <div class="lang" aria-label="Language switch">
+            <button class="lang-btn" data-lang="ua" type="button" aria-pressed="false">UA</button>
+            <button class="lang-btn" data-lang="en" type="button" aria-pressed="false">EN</button>
+        </div>
+    </nav>
+</header>
+
+<div class="layout" id="top">
+    <aside aria-hidden="true" class="side side--left"></aside>
+
+    <main class="center">
+        <div class="container">
+
+            <section class="section" id="projects">
+                <h1>
+                    <span data-i18n="ua">Проєкти</span>
+                    <span data-i18n="en" hidden>Projects</span>
+                </h1>
+
+                <p>
+          <span data-i18n="ua">
+            Тут зібрані приклади проєктів з коротким описом, посиланням на GDD та сторінкою з прикладами коду.
+          </span>
+                    <span data-i18n="en" hidden>
+            Here you can find project highlights with a short description, a link to the GDD, and a page with code samples.
+          </span>
+                </p>
+            </section>
+
+            <!-- Project: Carnage Club -->
+            <section class="section" id="project-carnage-club">
+                <h2>Carnage Club</h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Синглплеєр мобільна гра в Unity у стилі похмурої готики. Бойова система з 4 напрямками атаки/захисту,
+                          а вороги адаптуються до звичок гравця (пам’ять/аналітика дій, реакційні матриці, навчання патернів).
+                        </span>
+                                    <span data-i18n="en" hidden>
+                          A single-player mobile Unity game with a dark gothic vibe. Combat uses 4-direction attack/defense,
+                          while enemies adapt to the player’s habits (persistent behavior knowledge, reaction matrices, pattern learning).
+                        </span>
+                    </p>
+
+                    <div class="btn-row">
+                        <a class="btn" href="projects/carnage-club-gdd.html">
+                            <span data-i18n="ua">Подивитись GDD</span>
+                            <span data-i18n="en" hidden>View GDD</span>
+                        </a>
+
+                        <a class="btn btn--secondary" href="projects/carnage-club.html">
+                            <span data-i18n="ua">Приклади коду</span>
+                            <span data-i18n="en" hidden>Code samples</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Placeholder for future projects -->
+            <section class="section" id="project-next">
+                <h2>
+                    <span data-i18n="ua">Наступні проєкти</span>
+                    <span data-i18n="en" hidden>Next projects</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Тут з’являться наступні проєкти та приклади коду. (Скоро)
+                        </span>
+                                    <span data-i18n="en" hidden>
+                          More projects and code samples will appear here. (Coming soon)
+                        </span>
+                    </p>
+                </div>
+            </section>
+
+            <footer class="footer">
+        <span>© <span id="year"></span>
+          <span data-i18n="ua">Тарасенко Дмитро</span>
+          <span data-i18n="en" hidden>Tarasenko Dmytro</span>
+        </span>
+            </footer>
+
+        </div>
+    </main>
+
+    <aside aria-hidden="true" class="side side--right"></aside>
+</div>
+
+<script src="assets/js/i18n.js"></script>
+</body>
+</html>
