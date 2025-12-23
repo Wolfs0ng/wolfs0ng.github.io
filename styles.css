@@ -6,8 +6,8 @@
     --border: rgba(255,255,255,0.12);
     --accent: #d6b25e;
 
-    --center: 720px;
-    --sideMin: 160px;
+    --center: 960px;
+    --sideMin: 200px;
 }
 
 /* base */
@@ -247,7 +247,7 @@ body{
 }
 
 /* responsive: hide sides and make center full width */
-@media (max-width: 900px){
+@media (max-width: 1060px){
     .layout{
         grid-template-columns: 1fr;
     }
