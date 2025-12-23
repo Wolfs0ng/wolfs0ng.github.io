@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GDD — Carnage Club</title>
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
 
     <!-- GitHub-like markdown styles -->
     <link rel="stylesheet"
@@ -40,9 +40,16 @@
 <body>
 <header class="site-header">
     <nav class="nav">
-        <a class="brand" href="projects.html">
-            ← Back
+        <!-- Back to home -->
+        <a class="lang-btn projects-btn" href="../projects.html">
+            <span data-i18n="ua">Назад</span>
+            <span data-i18n="en" hidden>Back</span>
         </a>
+
+        <div class="lang" aria-label="Language switch">
+            <button class="lang-btn" data-lang="ua" type="button" aria-pressed="false">UA</button>
+            <button class="lang-btn" data-lang="en" type="button" aria-pressed="false">EN</button>
+        </div>
     </nav>
 </header>
 
@@ -62,7 +69,7 @@
 
 <!-- Markdown renderer -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
+<script src="../assets/js/i18n.js"></script>
 <script>
     fetch("/assets/docs/CarnageClubGDD.md")
       .then(r => {
