@@ -1,77 +1,173 @@
 <!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Wolfsong Info</title>
-    <meta name="description" content="Wolfsong info page with detailed project pages and code showcase.">
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/pages/home.css">
-</head>
-<body>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
-<header class="topbar">
-    <div class="wrap topbar__inner">
-        <a class="brand" href="/index.html">Головна сторінка</a>
-        <nav class="nav">
-            <a class="nav__link is-active" href="/index.html">Проєкти</a>
-            <a class="nav__link" href="/showcase/codetemplates.html">Приклади коду</a>
-            <a class="nav__link" href="/about/index.html">Контакти</a>
-        </nav>
-    </div>
+    <!-- Title will be set by JS based on language -->
+    <title>About — Dmytro</title>
+
+    <link href="styles.css" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <a class="brand" href="#top">
+            <span data-i18n="ua">Головна</span>
+            <span data-i18n="en" hidden>Home</span>
+        </a>
+
+        <div class="lang" aria-label="Language switch">
+            <button class="lang-btn" data-lang="ua" type="button" aria-pressed="false">UA</button>
+            <button class="lang-btn" data-lang="en" type="button" aria-pressed="false">EN</button>
+        </div>
+    </nav>
 </header>
 
-<main class="wrap">
-    <section class="hero">
-        <h1>Проєкти</h1>
-        <p class="muted">
-            Обери проєкт → дізнайся деталі → подивись приклади коду.
-        </p>
-    </section>
+<div class="layout" id="top">
+    <aside aria-hidden="true" class="side side--left"></aside>
 
-    <section class="grid">
-        <article class="card project">
-            <div class="project__head">
-                <div>
-                    <h2 class="project__title">Carnage Club</h2>
-                    <p class="project__tagline">
-                        тактичний дуельний бойовик, де ти воюєш не з цифрами, а з розумом, який памʼятає тебе.
-                    </p>
+    <main class="center">
+        <div class="container">
+
+            <section class="section" id="about">
+                <h1>
+                    <span data-i18n="ua">Привіт! Я Дмитро</span>
+                    <span data-i18n="en" hidden>Hi! I’m Dmytro</span>
+                </h1>
+
+                <p>
+          <span data-i18n="ua">
+            Lead Unity Developer з 13+ роками досвіду у розробці мобільних та PC-ігор різних жанрів.
+            Працюю на перетині архітектури, геймплейних систем і продакшену: від ідеї та прототипу — до релізу й live-підтримки.
+            Спеціалізуюся на побудові масштабованої архітектури, стабілізації великих кодових баз, оптимізації продуктивності та технічному лідерстві команд.
+          </span>
+
+                    <span data-i18n="en" hidden>
+            Lead Unity Developer with 13+ years of experience in developing mobile and PC games across multiple genres.
+            I work at the intersection of architecture, gameplay systems, and production — from concept and prototyping to release and live support.
+            I specialize in building scalable architectures, stabilizing large codebases, performance optimization, and providing technical leadership to development teams.
+          </span>
+                </p>
+            </section>
+
+            <section class="section" id="resume">
+                <h2>
+                    <span data-i18n="ua">Резюме</span>
+                    <span data-i18n="en" hidden>Resume</span>
+                </h2>
+
+                <div class="card">
+                    <div class="btn-row">
+                        <a class="btn" href="assets/TarasenkoDmytroResume.pdf" rel="noopener" target="_blank">
+                            <span data-i18n="ua">Відкрити PDF</span>
+                            <span data-i18n="en" hidden>Open PDF</span>
+                        </a>
+
+                        <a class="btn btn--secondary" download href="assets/TarasenkoDmytroResume.pdf">
+                            <span data-i18n="ua">Скачати</span>
+                            <span data-i18n="en" hidden>Download</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="badges">
-                    <span class="badge">Unity</span>
-                    <span class="badge">Mobile</span>
-                    <span class="badge">Adaptive AI</span>
+            </section>
+
+            <section class="section" id="contacts">
+                <h2>
+                    <span data-i18n="ua">Контакти</span>
+                    <span data-i18n="en" hidden>Contacts</span>
+                </h2>
+
+                <div class="card">
+                    <ul class="contact-list">
+                        <li><span>Email:</span> <a href="mailto:nemesidik@gmail.com">nemesidik@gmail.com</a></li>
+
+                        <li>
+                            <span>LinkedIn:</span>
+                            <a href="https://www.linkedin.com/in/dmytro-tarasenko-54511564/" rel="noopener" target="_blank">
+                                <span data-i18n="ua">Профіль LinkedIn</span>
+                                <span data-i18n="en" hidden>LinkedIn profile</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <span>GitHub:</span>
+                            <a href="https://github.com/Wolfs0ng" rel="noopener" target="_blank">Wolfs0ng</a>
+                        </li>
+
+                        <li>
+                            <span>Telegram:</span>
+                            <a href="#" rel="noopener" target="_blank">@--</a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </section>
 
-            <div class="project__media">
-                <div class="media-placeholder">Hero image / GIF</div>
-            </div>
+            <footer class="footer">
+        <span>© <span id="year"></span>
+          <span data-i18n="ua">Дмитро</span>
+          <span data-i18n="en" hidden>Dmytro</span>
+        </span>
+            </footer>
+        </div>
+    </main>
 
-            <ul class="list">
-                <li>4-напрямкова атака і захист</li>
-                <li>Telemetry → Knowledge → Reaction Matrix</li>
-                <li>Nemesis: вороги еволюціонують</li>
-            </ul>
+    <aside aria-hidden="true" class="side side--right"></aside>
+</div>
 
-            <div class="actions">
-                <a class="btn primary" href="projects/carnage-club.html">Відкрити проєкт</a>
-                <a class="btn" href="showcase/carnageclubcode.html">Приклади коду</a>
-            </div>
-        </article>
-
-        <article class="card project is-disabled">
-            <h2 class="project__title">Next Project</h2>
-            <div class="media-placeholder">Coming soon</div>
-        </article>
-    </section>
-
-    <footer class="footer">
-        <span class="muted">© <span id="y"></span></span>
-    </footer>
-</main>
-
-<script src="assets/site.js"></script>
+<script>
+    (function () {
+      const KEY = "site_lang";
+      const supported = new Set(["ua", "en"]);
+  
+      function setTitle(lang) {
+        document.title = lang === "ua" ? "Про мене — Дмитро" : "About — Dmytro";
+      }
+  
+      function setBrandAria(lang) {
+        const brand = document.querySelector(".brand");
+        if (!brand) return;
+        brand.setAttribute("aria-label", lang === "ua" ? "На початок" : "Back to top");
+      }
+  
+      function applyLang(lang) {
+        if (!supported.has(lang)) lang = "ua";
+  
+        // html lang attr (best practice: use actual "uk" for UA)
+        document.documentElement.lang = (lang === "ua") ? "uk" : "en";
+  
+        // show/hide translated nodes
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          el.hidden = el.getAttribute("data-i18n") !== lang;
+        });
+  
+        // buttons state
+        document.querySelectorAll(".lang-btn").forEach(btn => {
+          const isActive = btn.dataset.lang === lang;
+          btn.classList.toggle("is-active", isActive);
+          btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+  
+        setTitle(lang);
+        setBrandAria(lang);
+  
+        localStorage.setItem(KEY, lang);
+      }
+  
+      const urlLang = new URLSearchParams(location.search).get("lang");
+      const saved = localStorage.getItem(KEY);
+      const browser = (navigator.language || "uk").toLowerCase().startsWith("uk") ? "ua" : "en";
+  
+      const initial = supported.has(urlLang) ? urlLang : (supported.has(saved) ? saved : browser);
+      applyLang(initial);
+  
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+      });
+  
+      document.getElementById("year").textContent = new Date().getFullYear();
+    })();
+</script>
 </body>
 </html>
