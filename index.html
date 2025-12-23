@@ -6,7 +6,6 @@
 
     <!-- Title will be set by JS based on language -->
     <title>About — Dmytro</title>
-
     <link href="styles.css" rel="stylesheet"/>
 </head>
 
@@ -33,24 +32,128 @@
         <div class="container">
 
             <section class="section" id="about">
-                <h1>
-                    <span data-i18n="ua">Привіт! Я Тарасенко Дмитро</span>
-                    <span data-i18n="en" hidden>Hi! I’m Tarasenko Dmytro</span>
-                </h1>
-                <p>
-                    <span data-i18n="ua">
-                        Lead Unity Developer з 13+ роками досвіду у розробці мобільних та PC-ігор різних жанрів.
-                        Працюю на перетині архітектури, геймплейних систем і продакшену: від ідеї та прототипу — до релізу й live-підтримки.
-                        Спеціалізуюся на побудові масштабованої архітектури, стабілізації великих кодових баз, оптимізації продуктивності та технічному лідерстві команд.
-                    </span>
-                    <span data-i18n="en" hidden>
-                        Lead Unity Developer with 13+ years of experience in developing mobile and PC games across multiple genres.
-                        I work at the intersection of architecture, gameplay systems, and production — from concept and prototyping to release and live support.
-                        I specialize in building scalable architectures, stabilizing large codebases, performance optimization, and providing technical leadership to development teams.
-                    </span>
-                </p>
+                <div class="about-layout">
+                    <div class="about-photo">
+                        <img src="assets/images/ava.jpg" alt="Dmytro Tarasenko">
+                    </div>
+                    <div class="about-content">
+                        <h1>
+                            <span data-i18n="ua">Привіт! Я Дмитро</span>
+                            <span data-i18n="en" hidden>Hi! I’m Dmytro</span>
+                        </h1>
+                        <p>
+                            <span data-i18n="ua">
+                              Lead Unity Developer з 13+ роками досвіду у розробці мобільних та PC-ігор різних жанрів.
+                              Працюю на перетині архітектури, геймплейних систем і продакшену — від ідеї до релізу та live-підтримки.
+                            </span>
+                                                <span data-i18n="en" hidden>
+                              Lead Unity Developer with 13+ years of experience building mobile and PC games across multiple genres.
+                              I work at the intersection of architecture, gameplay systems, and production — from concept to release and live support.
+                            </span>
+                        </p>
+                        <div class="about-pills">
+                            <!-- UA -->
+                            <div class="lang-group" data-i18n="ua">
+                                <div class="pill-row">
+                                    <span class="pill accent">Unity</span>
+                                    <span class="pill accent">C#</span>
+                                    <span class="pill">C++</span>
+                                    <span class="pill">Git</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">ООП</span>
+                                    <span class="pill">Патерни проєктування</span>
+                                    <span class="pill">Алгоритми та структури даних</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill accent">Архітектура ігрових систем</span>
+                                    <span class="pill">Геймплейні системи</span>
+                                    <span class="pill">Tools & Pipelines</span>
+                                    <span class="pill">AI / Adaptive Systems</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">Mobile (Android/iOS)</span>
+                                    <span class="pill">Performance Profiling</span>
+                                    <span class="pill">Оптимізація продуктивності</span>
+                                    <span class="pill">UI/UX</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">Multiplayer</span>
+                                    <span class="pill">Client–Server</span>
+                                    <span class="pill">Ads & Analytics (Firebase, MaxSDK)</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">Розробка казуальних ігор</span>
+                                    <span class="pill">Розробка хардкорних ігор</span>
+                                    <span class="pill">Prototype → Release</span>
+                                    <span class="pill">Live Support</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill accent">Технічне лідерство</span>
+                                    <span class="pill">Менторинг команди</span>
+                                    <span class="pill">Business-Driven Technical Decisions</span>
+                                </div>
+                            </div>
+            
+                            <!-- EN -->
+                            <div class="lang-group" data-i18n="en" hidden>
+                                <div class="pill-row">
+                                    <span class="pill accent">Unity</span>
+                                    <span class="pill accent">C#</span>
+                                    <span class="pill">C++</span>
+                                    <span class="pill">Git</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">OOP</span>
+                                    <span class="pill">Design Patterns</span>
+                                    <span class="pill">Algorithms & Data Structures</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill accent">Game Systems Architecture</span>
+                                    <span class="pill">Gameplay Systems</span>
+                                    <span class="pill">Tools & Pipelines</span>
+                                    <span class="pill">AI / Adaptive Systems</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">Mobile (Android/iOS)</span>
+                                    <span class="pill">Performance Profiling</span>
+                                    <span class="pill">Performance Optimization</span>
+                                    <span class="pill">UI/UX</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">Multiplayer</span>
+                                    <span class="pill">Client–Server</span>
+                                    <span class="pill">Ads & Analytics (Firebase, MaxSDK)</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill">Casual Game Development</span>
+                                    <span class="pill">Hardcore Game Development</span>
+                                    <span class="pill">Prototype → Release</span>
+                                    <span class="pill">Live Support</span>
+                                </div>
+            
+                                <div class="pill-row">
+                                    <span class="pill accent">Technical Leadership</span>
+                                    <span class="pill">Team Mentoring</span>
+                                    <span class="pill">Business-Driven Technical Decisions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
-
+            
             <section class="section" id="resume">
                 <h2>
                     <span data-i18n="ua">Резюме</span>
@@ -86,10 +189,7 @@
 
                         <li>
                             <span>LinkedIn:</span>
-                            <a href="https://www.linkedin.com/in/dmytro-tarasenko-54511564/" rel="noopener" target="_blank">
-                                <span data-i18n="ua">Профіль LinkedIn</span>
-                                <span data-i18n="en" hidden>LinkedIn profile</span>
-                            </a>
+                            <a href="https://www.linkedin.com/in/dmytro-tarasenko-54511564/" rel="noopener" target="_blank">Profile</a>
                         </li>
 
                         <li>
@@ -99,7 +199,7 @@
 
                         <li>
                             <span>Telegram:</span>
-                            <a href="#" rel="noopener" target="_blank">@--</a>
+                            <a href="https://t.me/Wolfs0ng" rel="noopener" target="_blank">@Wolfs0ng</a>
                         </li>
                     </ul>
                 </div>
@@ -147,5 +247,8 @@
 </div>
 
 <script src="assets/js/i18n.js"></script>
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
