@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GDD — Carnage Club</title>
+
+    <link rel="stylesheet" href="../styles.css" />
+
+    <!-- GitHub-like markdown styles -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css" />
+
+    <style>
+        /* Markdown container tweaks */
+        .markdown-body {
+            background: transparent;
+            color: var(--text);
+            padding: 24px;
+            max-width: 100%;
+        }
+
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            border-bottom-color: var(--border);
+        }
+
+        .markdown-body code,
+        .markdown-body pre {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .markdown-body a {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <!-- Back to home -->
+        <a class="lang-btn projects-btn" href="../projects.html">
+            <span data-i18n="ua">Назад</span>
+            <span data-i18n="en" hidden>Back</span>
+        </a>
+    </nav>
+</header>
+
+<div class="layout">
+    <aside class="side side--left"></aside>
+
+    <main class="center">
+        <div class="container">
+            <article id="content" class="markdown-body">
+                Loading GDD…
+            </article>
+        </div>
+    </main>
+
+    <aside class="side side--right"></aside>
+</div>
+
+<!-- Markdown renderer -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script>
+    fetch("/assets/docs/CarnageClubGDD.md")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load CarnageClubGDD.md");
+        return r.text();
+      })
+      .then(md => {
+        document.getElementById("content").innerHTML = marked.parse(md);
+      })
+      .catch(err => {
+        document.getElementById("content").innerHTML =
+          "<p style='color:red'>Failed to load GDD</p>";
+        console.error(err);
+      });
+</script>
+</body>
+</html>

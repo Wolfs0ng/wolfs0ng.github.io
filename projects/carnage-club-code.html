@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carnage Club — Code</title>
+
+    <link rel="stylesheet" href="../styles.css" />
+
+    <style>
+        /* Small, consistent code styling without changing global CSS */
+        .code-block {
+            margin-top: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        pre {
+            margin: 0;
+            padding: 14px;
+            overflow: auto;
+            line-height: 1.45;
+            font-size: 13px;
+            color: rgba(255,255,255,0.88);
+        }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+        .pill-row { display:flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .pill {
+            display:inline-flex;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media (min-width: 820px){
+            .two-col { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="nav">
+        <div></div>
+
+        <div class="nav-right">
+            <a class="lang-btn projects-btn" href="../projects.html">
+                <span data-i18n="ua">Назад</span>
+                <span data-i18n="en" hidden>Back</span>
+            </a>
+
+            <button class="lang-btn" data-lang="ua" type="button" aria-pressed="false">UA</button>
+            <button class="lang-btn" data-lang="en" type="button" aria-pressed="false">EN</button>
+        </div>
+    </nav>
+</header>
+
+<div class="layout" id="top">
+    <aside class="side side--left" aria-hidden="true"></aside>
+
+    <main class="center">
+        <div class="container">
+
+            <!-- Intro -->
+            <section class="section" id="intro">
+                <h1>Carnage Club — Code</h1>
+                <p>
+          <span data-i18n="ua">
+            Нижче — приклади коду й технічних рішень з проєкту. Сніпети наведені у “portfolio-friendly” вигляді:
+            суть підходу збережена, але деталі можуть бути спрощені для читабельності.
+          </span>
+                    <span data-i18n="en" hidden>
+            Below are code samples and technical solutions from the project. Snippets are shown in a portfolio-friendly form:
+            the core approach is preserved, while some details may be simplified for readability.
+          </span>
+                </p>
+
+                <div class="pill-row">
+                    <span class="pill">Unity</span>
+                    <span class="pill">C#</span>
+                    <span class="pill">Architecture</span>
+                    <span class="pill">Telemetry</span>
+                    <span class="pill">AI Knowledge</span>
+                </div>
+            </section>
+
+            <!-- Block 1: Telemetry -->
+            <section class="section" id="telemetry">
+                <h2>
+                    <span data-i18n="ua">Телеметрія бою</span>
+                    <span data-i18n="en" hidden>Battle telemetry</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Каркас телеметрії збирає вибір дій гравця/AI (атака/захист) і результати резолву по кожному напрямку.
+                          Ці дані — “паливо” для шарів знань (патерни гравця, реакційна пам’ять AI).
+                        </span>
+                                    <span data-i18n="en" hidden>
+                          Telemetry collects player/AI choices (attack/defense) and resolution outcomes per direction.
+                          This data fuels knowledge layers (player behavior patterns, AI reaction memory).
+                        </span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>// Minimal interface shape
+public interface IBattleTelemetryService
+{
+    void BeginTurn(int roundIndex, CharacterState playerState, CharacterState aiState);
+
+    void RecordTurnChoices(ActorType actor, int[] attackDirs, int[] defendDirs);
+
+    void RecordResolutionOutcomes(int roundIndex, ActorType attacker, List&lt;AttackResolutionResult&gt; results);
+
+    void CompleteTurn(int roundIndex, CharacterState playerState, CharacterState aiState);
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Block 2: Player Knowledge -->
+            <section class="section" id="player-knowledge">
+                <h2>
+                    <span data-i18n="ua">Знання про звички гравця</span>
+                    <span data-i18n="en" hidden>Player behavior knowledge</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Шар знань підраховує використання напрямків і патернів (біграми/тріграми) окремо для атаки та захисту.
+                          Дані зберігаються у SaveData — “світ пам’ятає ваші звички”.
+                        </span>
+                        <span data-i18n="en" hidden>
+                          This layer tracks direction and pattern usage (bigrams/trigrams) separately for attack and defense.
+                          Data is persisted in SaveData — “the world remembers your habits”.
+                        </span>
+                    </p>
+
+                    <div>
+                        <div class="code-block">
+<pre><code>// Packed pattern key example: last | (current &lt;&lt; 8)
+private static int PackBigram(byte lastMask, byte currentMask)
+{
+    return lastMask | (currentMask &lt;&lt; 8);
+}
+
+// Trigram: a | (b &lt;&lt; 8) | (c &lt;&lt; 16)
+private static int PackTrigram(byte a, byte b, byte c)
+{
+    return a | (b &lt;&lt; 8) | (c &lt;&lt; 16);
+}</code></pre>
+                        </div>
+
+                        <div class="code-block">
+<pre><code>// Direction mask helper (4 directions => bits 0..3)
+[Flags]
+public enum DirectionMask : byte
+{
+    None = 0,
+    D1 = 1 &lt;&lt; 0,
+    D2 = 1 &lt;&lt; 1,
+    D3 = 1 &lt;&lt; 2,
+    D4 = 1 &lt;&lt; 3,
+}
+
+public static class TelemetryMaskUtils
+{
+    public static DirectionMask ToMask(IReadOnlyList&lt;int&gt; dirs)
+    {
+        DirectionMask mask = DirectionMask.None;
+        for (int i = 0; i &lt; dirs.Count; i++)
+            mask |= (DirectionMask)(1 &lt;&lt; (dirs[i] - 1)); // dirs are 1..4
+        return mask;
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Block 3: AI Reaction Knowledge -->
+            <section class="section" id="ai-reaction">
+                <h2>
+                    <span data-i18n="ua">AI Reaction Knowledge</span>
+                    <span data-i18n="en" hidden>AI reaction knowledge</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Окремий шар реакційної пам’яті AI: матриці “AI атака × блок гравця” та “атака гравця × блок AI”.
+                          Кожна клітинка збирає статистику (влучання/блок/парирування/гвард-брейк, сумарний урон) і використовується
+                          для оцінки найкращих рішень.
+                        </span>
+                                    <span data-i18n="en" hidden>
+                          A separate AI reaction memory layer: matrices for “AI attack × player block” and “player attack × AI block”.
+                          Each cell aggregates stats (hit/block/parry/guard break, damage sums) and is used to score the best decisions.
+                        </span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>// Packed cell key: attackDir | (defMask &lt;&lt; 8) | (isDefense ? 0x10000 : 0)
+public readonly struct ReactionCellKey
+{
+    public readonly int Key;
+
+    public ReactionCellKey(int attackDir, int defMask, bool isDefenseMatrix)
+    {
+        Key = (attackDir &amp; 0xFF) | ((defMask &amp; 0xFF) &lt;&lt; 8) | (isDefenseMatrix ? 0x10000 : 0);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="code-block">
+<pre><code>// Very simplified scoring example
+public static float ScoreCell(ReactionCellStats s, float guardWeight, float blockPenalty)
+{
+    if (s.Uses &lt; 3) return 0f; // cold start
+    float hitRate = (float)s.HitCount / s.Uses;
+    float blockRate = (float)s.BlockedCount / s.Uses;
+
+    return (hitRate * 1.0f)
+         + (s.GuardBreakCount * guardWeight / s.Uses)
+         - (blockRate * blockPenalty);
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Block 4: Architecture / Services -->
+            <section class="section" id="architecture">
+                <h2>
+                    <span data-i18n="ua">Архітектура сервісів</span>
+                    <span data-i18n="en" hidden>Service architecture</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Проєкт використовує Service Locator / DI-подібний підхід: сервіси — прості C# класи (без MonoBehaviour),
+                          реєстрація в AppStartup, логування централізоване. Це зменшує зв’язність і полегшує тести.
+                        </span>
+                                    <span data-i18n="en" hidden>
+                          The project follows a Service Locator / DI-like approach: services are plain C# classes (no MonoBehaviour),
+                          registered in AppStartup, with centralized logging. This reduces coupling and helps testing.
+                        </span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>public static class AppStartup
+{
+    public static void InitializeServices(IServiceLocator services)
+    {
+        services.Register&lt;IRandomService&gt;(new DefaultRandomService());
+        services.Register&lt;IBattleTelemetryService&gt;(new BattleTelemetryService());
+        services.Register&lt;IKnowledgeService&gt;(new KnowledgeService());
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Placeholder -->
+            <section class="section" id="next">
+                <h2>
+                    <span data-i18n="ua">Далі буде більше</span>
+                    <span data-i18n="en" hidden>More coming soon</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Тут з’являться додаткові приклади: Bandit tactics / GOAP / soft-FSM, UI контролери, тулінг, профілювання,
+                          та реальні фрагменти з продакшен-коду (у межах того, що можна публічно показувати).
+                        </span>
+                                    <span data-i18n="en" hidden>
+                          More samples will be added here: bandit tactics / GOAP / soft-FSM, UI controllers, tooling, profiling,
+                          and production-ready snippets (within what can be shared publicly).
+                        </span>
+                    </p>
+                </div>
+            </section>
+
+            <footer class="footer">
+        <span>© <span id="year"></span>
+          <span data-i18n="ua">Тарасенко Дмитро</span>
+          <span data-i18n="en" hidden>Tarasenko Dmytro</span>
+        </span>
+            </footer>
+
+        </div>
+    </main>
+
+    <aside class="side side--right" aria-hidden="true"></aside>
+</div>
+
+<script src="../assets/js/i18n.js"></script>
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
