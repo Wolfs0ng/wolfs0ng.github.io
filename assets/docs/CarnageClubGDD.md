@@ -9,21 +9,21 @@ This project is proprietary. Viewing only.
 # 🩸 Carnage Club
 
 > **Carnage Club** is:  
-> **a tactical duel-based combat game where you fight not numbers, but a mind that remembers you.**
+> **a tactical duel combat game where you fight not numbers, but a mind that remembers you.**
 
 ---
 
-## 🎮 Core Concept
+## 🎮 Core Idea
 
-**Carnage Club** is a singleplayer mobile game — a modern reinterpretation of classic browser games  
-*“Carnage / Fight Club”*, redesigned with a strong focus on:
+**Carnage Club** is a single-player mobile game focused on:
 
-- tactical, turn-based dueling combat  
-- adaptive AI that learns from the player  
-- a dark gothic atmosphere  
-- reading and outsmarting the opponent instead of chasing DPS  
+- tactical turn-based duels
+- adaptive AI that learns from the player
+- dark gothic setting
+- reading the opponent instead of a DPS race
+- DnD-style character progression
 
-Core philosophy of the project:
+Core concept:
 > **The world remembers your habits.**
 
 ---
@@ -32,48 +32,47 @@ Core philosophy of the project:
 
 - **Mobile first**
 - **Singleplayer**
-- Story-driven campaign
-- Post-campaign infinite / replayable mode
+- Campaign with story progression
+- After the campaign — a semi-endless mode
 - Engine: **Unity 6.x**
 
 ---
 
 ## 🎨 Visual Style
 
-### Mood
-- Dark gothic atmosphere
-- Inspirations: Bloodborne, baroque aesthetics, dark luxury
-- A sense of an old world filled with rituals, decay, and blood
+### Atmosphere
+- Dark gothic tone
+- Inspirations: Bloodborne, baroque, dark luxury
+- A sense of an old world, rituals, and blood
 
 ### Color Palette
-- ⚫ **Black** — base tone, atmosphere
+- ⚫ **Black** — base, atmosphere
 - 🟡 **Gold** — ornaments, doors, key elements
 - 🔴 **Red** — blood, traces of battle
 
 ### UI
-- Entire game runs inside a Canvas
-- Dark UI with strong contrast accents
-- Health / Guard bars
+- Dark interface with contrast accents
+- Health / Guard / Stamina bars
 - Popup / Hint / Notification systems with pooling
-- Preloader background: stairs leading to a gothic cathedral with open doors
+- Preloader: stairs to a gothic cathedral with open doors
 
 ---
 
 ## 🗺️ Map & Progression
 
-Before each fight, the player navigates a **top-down node-based map** (similar to *Slay the Spire*).
+Before a fight, the player moves across a **top-down node-based map** (similar to *Slay the Spire*).
 
 ### Node Types
-- ⚔ Combat
+- ⚔ Fight
 - 👑 Boss
 - 🔥 Bonfire (rest)
 - 🧙‍♂️ Merchant
-- ❓ Events (extensible)
+- ❓ Events (expandable)
 
-### Rules
+### Mechanics
 - Only connected and unlocked nodes are visible
 - Backtracking is allowed
-- Penalties for excessive movement are still in design
+- Penalty system for extra movement — in design
 
 ---
 
@@ -82,86 +81,167 @@ Before each fight, the player navigates a **top-down node-based map** (similar t
 ### Directions
 - **4 attack directions**
 - **4 defense directions**
-- Support for multi-direction actions (1–3 at once)
+- Multi-direction support (1–3 simultaneously)
+- Action points (skills, quick-access items, etc.)
 
-### Core Rules
+### Combat Principles
 - Turn-based duel combat
-- Each attack direction is resolved independently
-- Defense may cover multiple directions
+- Selected attack directions (player) and defense directions (opponent), and vice versa, are checked; on match, block/parry/etc. triggers
+- Each attack direction is resolved separately
+- Defense can cover multiple directions
+- After each round, a log (and visual elements) explains enemy attack/defense choices so the player can adapt
+- The enemy does not attack randomly — it thinks, plans, tests, and remembers
 
 ### Possible Outcomes
-- Damage HP
-- Damage Guard
-- Block
-- Parry
-- Guard Break
-- Critical Hit
+- Damage HP (deal damage to enemy health)
+- Damage Guard (deal damage to enemy Guard Stance)
+- Block (block damage and avoid Guard damage)
+- Parry (block the attack and respond into the attack zone) — in design
+
+### Attack Effects
+- Guard Break (Damage Guard reduced Guard Stance to 0 or below) — in design
+- Critical (damage multiplied by a critical modifier) — in design
+- Exhaust (stamina reduced to 0 or below) — in design
 
 ---
 
 ## 🧬 Character Stats
 
-| Stat | Description |
-|----|----|
-| **Strength** | Attack power and guard break potential |
-| **Fortitude** | HP, endurance, Guard Stance strength |
-| **Mastery** | Stamina and special effect activation chance |
-| **Focus** | Enemy reading, AI learning speed, reduced enemy adaptation |
+Still in design and may change.
 
-**Focus** is a unique stat that directly interacts with AI systems.
+| Stat          | Description                                                    |
+|---------------|----------------------------------------------------------------|
+| **Strength**  | Hit power, block penetration                                   |
+| **Fortitude** | HP, endurance, Guard Stance strength                           |
+| **Mastery**   | Stamina, chance of special effects                             |
+| **Focus**     | Reading the enemy, AI learning speed, reduced enemy adaptation |
+
+**Focus** is the key unique stat that directly interacts with AI.
 
 ---
 
-## 🧠 AI — Core Feature of the Game
+## 🧩 Skills
+
+In design.  
+All skills consume an **Action Point**.  
+A skill can be targeted (choose one or multiple directions) or simply activated.
+
+Examples:
+- **Piercing Strike** (next attack breaks through block and deals HP damage)
+- **Mark** (choose a direction; next turn, a hit in that zone deals increased damage)
+- **Disorientation** (next turn, a chosen attack or defense might fail)
+
+---
+
+## ✨ Abilities
+
+In design.  
+Can be passive or triggered (on conditions).
+
+Passive examples:
+- **Endurance** (increased HP)
+- **Ambidexterity** (reduced penalties for a weapon in the off-hand)
+- **See Weak Spots** (increased critical chance)
+
+Triggered examples:
+- **Cleave** (with a two-handed weapon, if a head hit was not blocked, deal damage for each unblocked direction top-down)
+- **Bestial Reaction** (when hit into a parry direction, instead of taking HP damage you block, but take Guard damage)
+- **Mighty Blow** (when hitting a block and triggering Guard Break, overflow damage goes to HP)
+
+---
+
+## 🎒 Inventory
+
+In design.  
+Equipable item list:
+
+### Weapons
+- Left hand (One-handed weapon, Two-handed weapon)
+- Right hand (One-handed weapon — with weakened parameters, Shield)
+
+### Armor
+- Helmet
+- Cloak
+- Body armor
+- Gloves
+- Pants
+- Belt
+- Boots
+
+### Accessories
+- Amulet (one or multiple)
+- Rings (2 or more)
+
+### Quick Access Slots
+In design.  
+Items worn on the belt can be used during combat at the cost of the item and **Action Points**:
+- Potions
+- Grenades
+- Thrown weapons
+- Scrolls
+
+### Weapons (Playstyle Impact)
+In design.  
+Weapon type and combinations (shield + one-handed, dual-wield, two-handed sword) change the playstyle.
+
+Examples:
+- Two-handed swords, halberds, axes enable cleave-related mechanics
+- Two-handed hammers, maces enable debuffs during attacks
+- One-handed weapon + shield grants two defense directions (or more)
+- Dual one-handed weapons grant two attack directions
+
+---
+
+## 🧠 AI — Core Feature
 
 AI is built as a **layered knowledge and decision-making system**.
 
-### 0️⃣ Telemetry (Foundation)
-- Records every combat turn
-- Captures before/after states (HP, Guard)
+### 0️⃣ Telemetry (foundation)
+- Records every turn
+- Pre/post states (HP, Guard)
 - Player and AI actions
-- Per-direction combat outcomes
+- Per-direction outcomes
 - Human-readable debug logs
 
 ---
 
 ### 1️⃣ Player Battle Behavior Knowledge
-**Persistent global memory of player behavior:**
+**Global persistent memory of player behavior:**
 
-- Attack and defense direction frequencies
-- Direction pattern usage (DirectionMask)
-- Bigram and trigram sequences across turns
+- Attack/defense frequency per direction
+- Direction patterns (DirectionMask)
+- Bigrams and trigrams between turns
 - Rolling window statistics
 - Pattern efficiency (hit / block / damage)
 
-> This knowledge persists between game sessions.
+> Knowledge persists between game sessions.
 
 ---
 
 ### 2️⃣ AI Reaction Knowledge (Action–Reaction Matrix)
 
 Reaction matrices:
-- AI attack → Player defense
-- Player attack → AI defense
+- AI attack → Player defend
+- Player attack → AI defend
 
-Tracked statistics:
+Collected stats:
 - hit / block / parry
-- HP damage / Guard damage
-- critical hits, guard breaks
+- HP / Guard damage
+- critical, guard break
 
 Evaluators:
-- Best attack against a given defense mask
-- Best defense against a given attack direction
+- Best attack vs a specific defense
+- Best defense vs a specific attack
 - Cold-start fallback logic
 
-This is a **separate layer** from player behavior knowledge.
+This is a **separate layer** from player knowledge.
 
 ---
 
 ### 3️⃣ Bandit Tactics *(planned)*
 - Thompson Sampling / UCB
 - Exploration budget
-- Context-aware states (LowHP, AfterHit, Repetition, etc.)
+- Context states (LowHP, AfterHit, Repetition, etc.)
 
 ---
 
@@ -170,7 +250,7 @@ This is a **separate layer** from player behavior knowledge.
   - Pressure
   - Punish
   - Survive
-- FSM for concrete execution
+- FSM for executing concrete actions
 
 ---
 
@@ -179,29 +259,28 @@ This is a **separate layer** from player behavior knowledge.
 - Fear
 - Confidence
 
-Emotions modify risk-taking and AI decision-making.
+Emotions modify risk and AI decision-making.
 
 ---
 
 ## 👑 Nemesis System
 
-- When an enemy kills the player:
-  - it evolves
-  - becomes stronger
-  - retains memory of past encounters
-- Every enemy represents a personal history of conflict
+- If an enemy kills the player:
+  - it evolves (level increases, class changes/adapts)
+  - becomes stronger (stat changes, new/upgraded perks/abilities)
+- Each enemy becomes a story of rivalry
 
 ---
 
 ## 🛠️ Technical Architecture
 
-- Service Locator pattern
-- Services implemented as plain C# (no MonoBehaviour unless required)
-- Minimal use of Update loops
+- Service Locator
+- Services are plain C# (no MonoBehaviour)
+- Minimal use of Update
 - Object Pooling
-- ScriptableObject-based data containers
+- ScriptableObjects for data
 - Unit tests for services
-- Unity-friendly SaveData DTOs
+- Unity-friendly SaveData DTO
 
 ---
 
@@ -209,8 +288,8 @@ Emotions modify risk-taking and AI decision-making.
 
 - Free-to-play
 - Minimal banner ads
-- Cosmetic content
-- Special currency earnable through gameplay
-- Optional voluntary support for the developer
+- Cosmetic items
+- Special currency obtainable through gameplay
+- Optional voluntary author support (subscription for cosmetics or similar, enabling ads, etc.)
 
 ---
