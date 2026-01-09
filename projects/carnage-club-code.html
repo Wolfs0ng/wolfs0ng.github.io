@@ -107,7 +107,7 @@
                           Каркас телеметрії збирає вибір дій гравця/AI (атака/захист) і результати резолву по кожному напрямку.
                           Ці дані — “паливо” для шарів знань (патерни гравця, реакційна пам’ять AI).
                         </span>
-                                    <span data-i18n="en" hidden>
+                        <span data-i18n="en" hidden>
                           Telemetry collects player/AI choices (attack/defense) and resolution outcomes per direction.
                           This data fuels knowledge layers (player behavior patterns, AI reaction memory).
                         </span>
@@ -204,7 +204,7 @@ public static class TelemetryMaskUtils
                           Кожна клітинка збирає статистику (влучання/блок/парирування/гвард-брейк, сумарний урон) і використовується
                           для оцінки найкращих рішень.
                         </span>
-                                    <span data-i18n="en" hidden>
+                        <span data-i18n="en" hidden>
                           A separate AI reaction memory layer: matrices for “AI attack × player block” and “player attack × AI block”.
                           Each cell aggregates stats (hit/block/parry/guard break, damage sums) and is used to score the best decisions.
                         </span>
@@ -252,7 +252,7 @@ public static float ScoreCell(ReactionCellStats s, float guardWeight, float bloc
                           Проєкт використовує Service Locator / DI-подібний підхід: сервіси — прості C# класи (без MonoBehaviour),
                           реєстрація в AppStartup, логування централізоване. Це зменшує зв’язність і полегшує тести.
                         </span>
-                                    <span data-i18n="en" hidden>
+                        <span data-i18n="en" hidden>
                           The project follows a Service Locator / DI-like approach: services are plain C# classes (no MonoBehaviour),
                           registered in AppStartup, with centralized logging. This reduces coupling and helps testing.
                         </span>
@@ -272,6 +272,180 @@ public static float ScoreCell(ReactionCellStats s, float guardWeight, float bloc
                 </div>
             </section>
 
+            <!-- Block 5: Пункт 3 — Bandit tactics + контекстний exploration -->
+            <section class="section" id="ai-bandit">
+                <h2>
+                    <span data-i18n="ua">Пункт 3 — Bandit tactics + контекстний exploration</span>
+                    <span data-i18n="en" hidden>Point 3 — Bandit tactics + contextual exploration</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">Вибір дій через Thompson Sampling (exploitation) та керований exploration з урахуванням контексту бою. Показую лише форму/ідею — без усіх деталей тюнінгу та внутрішніх структур.</span>
+                        <span data-i18n="en" hidden>Action selection via Thompson Sampling (exploitation) and guided exploration that adapts to combat context. This is an idea/shape excerpt — tuning and internal details are intentionally omitted.</span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>// Phase 3 (portfolio excerpt): bandit + contextual exploration
+public sealed class AiDecisionSelectionService
+{
+    private const int TopN = 6;
+    private const float KnowledgeBiasMin = 0.2f;
+
+    public CandidateWithScore SelectAction(
+        IReadOnlyList&lt;CandidateWithScore&gt; candidates,
+        CombatContext context,
+        int roundIndex,
+        TacticalDirective directive)
+    {
+        // 1) Decide: explore vs exploit (epsilon is context-aware + decays over time)
+        float exploreRoll = randomService.NextFloat01();
+        bool shouldExplore = explorationBudget.ShouldExplore(context, exploreRoll, roundIndex, directive.ExplorationBias);
+
+        // 2) Exploit: Thompson sampling over Beta priors (knowledge + learned trials)
+        if (!shouldExplore)
+            return thompson.SelectTopBySample(candidates, banditStats);
+
+        // 3) Explore (guided): weighted-random among TopN
+        //    weight = uncertainty(uses) * knowledgeBias(score)
+        var top = TakeTopN(candidates, TopN);
+        return PickWeighted(top, c =&gt; Uncertainty(c.ActionKey) * KnowledgeBias(c.KnowledgeScore));
+    }
+
+    private float Uncertainty(string actionKey)
+    {
+        // Higher when an arm has fewer considerations; encourages trying “unknown” options.
+        int uses = banditStats.GetUses(actionKey);
+        return 1f / Mathf.Sqrt(uses + 1);
+    }
+
+    private float KnowledgeBias(int knowledgeScore)
+    {
+        // Clamp score to [-100..100], then map to [KnowledgeBiasMin..1]
+        float t = Mathf.InverseLerp(-100f, 100f, Mathf.Clamp(knowledgeScore, -100, 100));
+        return Mathf.Lerp(KnowledgeBiasMin, 1f, t);
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="code-block">
+<pre><code>// Bandit arm statistics (excerpt): knowledge-based prior + learned outcomes
+public sealed class BanditArmStats
+{
+    public int Uses { get; private set; } // number of times this arm was considered
+    private float priorAlpha, priorBeta;  // derived from knowledgeScore
+    private int learnedSuccesses, learnedFailures;
+
+    public float EstimatedMeanReward()
+    {
+        float a = priorAlpha + learnedSuccesses;
+        float b = priorBeta  + learnedFailures;
+        return a / (a + b);
+    }
+
+    public void RecordConsideration() =&gt; Uses++;
+    public void RecordTurnOutcome(float reward)
+    {
+        if (reward &gt; 0f) learnedSuccesses++;
+        else learnedFailures++;
+    }
+
+    public void UpdateKnowledge(int knowledgeScore)
+    {
+        // Resets the prior from reaction-knowledge score (details omitted for brevity)
+        (priorAlpha, priorBeta) = BuildPriorFromScore(knowledgeScore);
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Block 6: Пункт 4 — GOAP-lite intent planner + Soft FSM (hysteresis) -->
+            <section class="section" id="ai-intent-fsm">
+                <h2>
+                    <span data-i18n="ua">Пункт 4 — GOAP-lite intent planner + Soft FSM (hysteresis)</span>
+                    <span data-i18n="en" hidden>Point 4 — GOAP-lite intent planner + Soft FSM (hysteresis)</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">High-level intent (Pressure/Survive/Punish) обирається утилітарним планером з інерцією, а Soft FSM стабілізує переходи (поріг, мін/макс стабільність) і має критичні override’и для ключових ситуацій.</span>
+                        <span data-i18n="en" hidden>High-level intent (Pressure/Survive/Punish) is chosen by a utility planner with inertia, while a Soft FSM stabilizes transitions (threshold, min/max stability) and applies critical overrides for key situations.</span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>// Phase 4 (portfolio excerpt): GOAP-lite intent planner (utility + inertia)
+public sealed class AiIntentPlanner : IAiIntentPlanner
+{
+    private const float InertiaBonus = 0.10f;
+
+    public IntentPlanResult PlanIntent(CombatContext ctx, KnowledgeSummary k, ActiveIntentState prev)
+    {
+        if (k == null)
+            return IntentPlanResult.DefaultSurvive(ctx); // safe fallback
+
+        float pressure = ScorePressure(ctx, k);
+        float survive  = ScoreSurvive(ctx, k);
+        float punish   = ScorePunish(ctx, k);
+
+        // Inertia: stabilize behavior to avoid “twitchy” intent switching
+        if (prev != null)
+        {
+            if (prev.CurrentIntent == AiIntentType.Pressure) pressure += InertiaBonus;
+            if (prev.CurrentIntent == AiIntentType.Survive)  survive  += InertiaBonus;
+            if (prev.CurrentIntent == AiIntentType.Punish)   punish   += InertiaBonus;
+        }
+
+        pressure = Mathf.Clamp01(pressure);
+        survive  = Mathf.Clamp01(survive);
+        punish   = Mathf.Clamp01(punish);
+
+        AiIntentType best = ArgMax(pressure, survive, punish);
+        return IntentPlanResult.From(best, pressure, survive, punish, ctx);
+    }
+
+    // Score*() methods use context + knowledge (success rates, predictability, repetition…)
+    // Full tuning is intentionally omitted.
+}</code></pre>
+                    </div>
+
+                    <div class="code-block">
+<pre><code>// Soft FSM executor (excerpt): hysteresis + critical overrides
+public sealed class AiSoftFsmExecutor : IAiSoftFsmExecutor
+{
+    private const float TransitionThreshold = 0.15f;
+    private const int MinStableTurns = 2;
+    private const int MaxStableTurns = 8;
+
+    public bool EvaluateTransition(ActiveIntentState state, IntentPlanResult plan, CombatContext ctx, KnowledgeSummary k, int turn)
+    {
+        // Critical overrides first (high-stakes / high-signal situations)
+        if (ctx == CombatContext.AILowHealth)
+            return state.TryTransition(AiIntentType.Survive, turn, &quot;critical_low_hp&quot;);
+
+        if (k != null &amp;&amp; k.PlayerPredictability &gt;= 0.80f &amp;&amp; k.KnowledgeConfidence &gt;= 0.60f &amp;&amp; k.TotalTurns &gt;= 3)
+            return state.TryTransition(AiIntentType.Punish, turn, &quot;critical_high_predictability&quot;);
+
+        // Hysteresis: only switch if the new plan is clearly better and we&#x27;ve been stable long enough
+        if (state.TurnsActive &lt; MinStableTurns)
+            return false;
+
+        float current = plan.UtilityScores[state.CurrentIntent];
+        float target  = plan.UtilityScores[plan.SelectedIntent];
+        if (target - current &gt;= TransitionThreshold)
+            return state.TryTransition(plan.SelectedIntent, turn, $&quot;utility_delta:{target-current:0.00}&quot;);
+
+        // Prevent being stuck forever
+        if (state.TurnsActive &gt;= MaxStableTurns)
+            return state.TryTransition(plan.SelectedIntent, turn, &quot;max_stable_turns&quot;);
+
+        return false;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
             <!-- Placeholder -->
             <section class="section" id="next">
                 <h2>
@@ -282,11 +456,11 @@ public static float ScoreCell(ReactionCellStats s, float guardWeight, float bloc
                 <div class="card">
                     <p>
                         <span data-i18n="ua">
-                          Тут з’являться додаткові приклади: Bandit tactics / GOAP / soft-FSM, UI контролери, тулінг, профілювання,
+                          Тут з’являться додаткові приклади: UI контролери, тулінг, профілювання,
                           та реальні фрагменти з продакшен-коду (у межах того, що можна публічно показувати).
                         </span>
-                                    <span data-i18n="en" hidden>
-                          More samples will be added here: bandit tactics / GOAP / soft-FSM, UI controllers, tooling, profiling,
+                        <span data-i18n="en" hidden>
+                          More samples will be added here: UI controllers, tooling, profiling,
                           and production-ready snippets (within what can be shared publicly).
                         </span>
                     </p>
