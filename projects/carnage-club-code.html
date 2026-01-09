@@ -272,11 +272,11 @@ public static float ScoreCell(ReactionCellStats s, float guardWeight, float bloc
                 </div>
             </section>
 
-            <!-- Block 5: Пункт 3 — Bandit tactics + контекстний exploration -->
+            <!-- Block 5: Bandit tactics + контекстний exploration -->
             <section class="section" id="ai-bandit">
                 <h2>
-                    <span data-i18n="ua">Пункт 3 — Bandit tactics + контекстний exploration</span>
-                    <span data-i18n="en" hidden>Point 3 — Bandit tactics + contextual exploration</span>
+                    <span data-i18n="ua">Bandit tactics + контекстний exploration</span>
+                    <span data-i18n="en" hidden>Bandit tactics + contextual exploration</span>
                 </h2>
 
                 <div class="card">
@@ -286,7 +286,7 @@ public static float ScoreCell(ReactionCellStats s, float guardWeight, float bloc
                     </p>
 
                     <div class="code-block">
-<pre><code>// Phase 3 (portfolio excerpt): bandit + contextual exploration
+<pre><code>// bandit + contextual exploration
 public sealed class AiDecisionSelectionService
 {
     private const int TopN = 6;
@@ -360,11 +360,11 @@ public sealed class BanditArmStats
                 </div>
             </section>
 
-            <!-- Block 6: Пункт 4 — GOAP-lite intent planner + Soft FSM (hysteresis) -->
+            <!-- Block 6: GOAP-lite intent planner + Soft FSM (hysteresis) -->
             <section class="section" id="ai-intent-fsm">
                 <h2>
-                    <span data-i18n="ua">Пункт 4 — GOAP-lite intent planner + Soft FSM (hysteresis)</span>
-                    <span data-i18n="en" hidden>Point 4 — GOAP-lite intent planner + Soft FSM (hysteresis)</span>
+                    <span data-i18n="ua">GOAP-lite intent planner + Soft FSM (hysteresis)</span>
+                    <span data-i18n="en" hidden>GOAP-lite intent planner + Soft FSM (hysteresis)</span>
                 </h2>
 
                 <div class="card">
@@ -374,7 +374,7 @@ public sealed class BanditArmStats
                     </p>
 
                     <div class="code-block">
-<pre><code>// Phase 4 (portfolio excerpt): GOAP-lite intent planner (utility + inertia)
+<pre><code>// GOAP-lite intent planner (utility + inertia)
 public sealed class AiIntentPlanner : IAiIntentPlanner
 {
     private const float InertiaBonus = 0.10f;
