@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../styles.css" />
 
     <style>
-        /* Small, consistent code styling without changing global CSS */
         .code-block {
             margin-top: 12px;
             border: 1px solid var(--border);
@@ -77,11 +76,11 @@
                 <p>
           <span data-i18n="ua">
             Нижче — приклади коду й технічних рішень з проєкту. Сніпети наведені у “portfolio-friendly” вигляді:
-            суть підходу збережена, але деталі можуть бути спрощені для читабельності.
+            суть підходу збережена, але деталі спрощені для читабельності.
           </span>
                     <span data-i18n="en" hidden>
             Below are code samples and technical solutions from the project. Snippets are shown in a portfolio-friendly form:
-            the core approach is preserved, while some details may be simplified for readability.
+            the core approach is preserved, while details are simplified for readability.
           </span>
                 </p>
 
@@ -94,7 +93,40 @@
                 </div>
             </section>
 
-            <!-- Block 1: Telemetry -->
+            <!-- Block 1: Architecture / Services -->
+            <section class="section" id="architecture">
+                <h2>
+                    <span data-i18n="ua">Архітектура сервісів</span>
+                    <span data-i18n="en" hidden>Service architecture</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">
+                          Проєкт використовує Service Locator / DI-подібний підхід: сервіси — прості C# класи (без MonoBehaviour),
+                          реєстрація в AppStartup, логування централізоване. Це зменшує зв’язність і полегшує тести.
+                        </span>
+                        <span data-i18n="en" hidden>
+                          The project follows a Service Locator / DI-like approach: services are plain C# classes (no MonoBehaviour),
+                          registered in AppStartup, with centralized logging. This reduces coupling and helps testing.
+                        </span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>public static class AppStartup
+{
+    public static void InitializeServices(IServiceLocator services)
+    {
+        services.Register&lt;IRandomService&gt;(new DefaultRandomService());
+        services.Register&lt;IBattleTelemetryService&gt;(new BattleTelemetryService());
+        services.Register&lt;IKnowledgeService&gt;(new KnowledgeService());
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Block 2: Telemetry -->
             <section class="section" id="telemetry">
                 <h2>
                     <span data-i18n="ua">Телеметрія бою</span>
@@ -104,32 +136,36 @@
                 <div class="card">
                     <p>
                         <span data-i18n="ua">
-                          Каркас телеметрії збирає вибір дій гравця/AI (атака/захист) і результати резолву по кожному напрямку.
-                          Ці дані — “паливо” для шарів знань (патерни гравця, реакційна пам’ять AI).
+                          Каркас телеметрії збирає вибір дій гравця/AI (атака/захист/інші дії) і результати резолву по кожному напрямку.
+                          Ці дані — "паливо" для шарів знань (патерни гравця, реакційна пам’ять AI).
                         </span>
-                                    <span data-i18n="en" hidden>
-                          Telemetry collects player/AI choices (attack/defense) and resolution outcomes per direction.
+                        <span data-i18n="en" hidden>
+                          Telemetry collects player/AI choices (attack/defense/other actions) and resolution outcomes per direction.
                           This data fuels knowledge layers (player behavior patterns, AI reaction memory).
                         </span>
                     </p>
 
                     <div class="code-block">
-<pre><code>// Minimal interface shape
+<pre><code>
 public interface IBattleTelemetryService
 {
     void BeginTurn(int roundIndex, CharacterState playerState, CharacterState aiState);
 
-    void RecordTurnChoices(ActorType actor, int[] attackDirs, int[] defendDirs);
+    void RecordTurnChoices(BattleActor actor, IReadOnlyList&lt;BattleDirection&gt; attackDirections,
+        IReadOnlyList&lt;BattleDirection&gt; defendDirections);
 
-    void RecordResolutionOutcomes(int roundIndex, ActorType attacker, List&lt;AttackResolutionResult&gt; results);
+    void RecordResolutionOutcomes(int roundIndex, BattleActor attackerActor,
+        IReadOnlyList&lt;AttackResolutionResult&gt; attackResults);
 
     void CompleteTurn(int roundIndex, CharacterState playerState, CharacterState aiState);
+
+    IReadOnlyList&lt;BattleTurnTelemetry&gt; GetTurnsSnapshot();
 }</code></pre>
                     </div>
                 </div>
             </section>
 
-            <!-- Block 2: Player Knowledge -->
+            <!-- Block 3: Player Knowledge -->
             <section class="section" id="player-knowledge">
                 <h2>
                     <span data-i18n="ua">Знання про звички гравця</span>
@@ -139,12 +175,32 @@ public interface IBattleTelemetryService
                 <div class="card">
                     <p>
                         <span data-i18n="ua">
-                          Шар знань підраховує використання напрямків і патернів (біграми/тріграми) окремо для атаки та захисту.
-                          Дані зберігаються у SaveData — “світ пам’ятає ваші звички”.
+                        Шар знань підраховує використання напрямків і патернів (біграми/тріграми) окремо для атаки та захисту.
+                        Дані зберігаються у SaveData — “світ пам’ятає ваші звички”.<br>
+                            
+                        У проєкті <strong>Carnage Club</strong> біграми та тріграми використовуються для виявлення повторюваних бойових патернів гравця (послідовностей атак або захистів між ходами).<br><br>
+                        Після кожного завершеного ходу формується <strong>DirectionMask</strong> (bitmask напрямків атаки або захисту).<br>
+                        Маска додається в обмежене <strong>rolling history window</strong> (FIFO), яке зберігає лише останні N ходів.<br>
+                        <strong>Біграм</strong> формується як пара масок: (previous → current).<br>
+                        <strong>Тріграм</strong> формується як трійка масок: (prev-2 → prev-1 → current).<br>
+                        Комбінації пакуються в компактний ключ типу <code>int</code> (bit packing) для швидкого пошуку в словниках і мінімального використання памʼяті.<br>
+                        Статистика накопичується як частота використання патернів без збереження повної історії бою.<br><br>
+                        
+                        Такий підхід дозволяє виявляти повтори та цикли дій гравця, оцінювати передбачуваність поведінки та живити вищі рівні AI (Reaction Knowledge, GOAP, Bandit Tactics) без дорогого аналізу логів.
                         </span>
                         <span data-i18n="en" hidden>
-                          This layer tracks direction and pattern usage (bigrams/trigrams) separately for attack and defense.
-                          Data is persisted in SaveData — “the world remembers your habits”.
+                            This layer tracks direction and pattern usage (bigrams/trigrams) separately for attack and defense.
+                            Data is persisted in SaveData — “the world remembers your habits”.<br>
+                            
+                            In the <strong>Carnage Club</strong> project, bigrams and trigrams are used to detect repeating player combat patterns (sequences of attacks or defenses across turns).<br><br>
+                            After each completed turn, a <strong>DirectionMask</strong> is produced (a bitmask representing selected attack or defense directions).<br>
+                            The mask is pushed into a bounded <strong>rolling history window</strong> (FIFO), which keeps only the last N turns.<br>
+                            A <strong>bigram</strong> is formed as a pair of masks: (previous → current).<br>
+                            A <strong>trigram</strong> is formed as a triplet of masks: (prev-2 → prev-1 → current).<br>
+                            Pattern combinations are packed into a compact <code>int</code> key (bit packing) to enable fast dictionary lookups and minimal memory footprint.<br>
+                            Statistics are accumulated as pattern usage frequencies, without storing the full combat history.<br><br>
+                            
+                            This approach enables the system to detect repeated actions and cyclic behavior, estimate player predictability, and feed higher-level AI systems (Reaction Knowledge, GOAP, Bandit Tactics) without expensive log analysis.
                         </span>
                     </p>
 
@@ -190,7 +246,7 @@ public static class TelemetryMaskUtils
                 </div>
             </section>
 
-            <!-- Block 3: AI Reaction Knowledge -->
+            <!-- Block 4: AI Reaction Knowledge -->
             <section class="section" id="ai-reaction">
                 <h2>
                     <span data-i18n="ua">AI Reaction Knowledge</span>
@@ -204,7 +260,7 @@ public static class TelemetryMaskUtils
                           Кожна клітинка збирає статистику (влучання/блок/парирування/гвард-брейк, сумарний урон) і використовується
                           для оцінки найкращих рішень.
                         </span>
-                                    <span data-i18n="en" hidden>
+                        <span data-i18n="en" hidden>
                           A separate AI reaction memory layer: matrices for “AI attack × player block” and “player attack × AI block”.
                           Each cell aggregates stats (hit/block/parry/guard break, damage sums) and is used to score the best decisions.
                         </span>
@@ -225,47 +281,389 @@ public readonly struct ReactionCellKey
 
                     <div class="code-block">
 <pre><code>// Very simplified scoring example
-public static float ScoreCell(ReactionCellStats s, float guardWeight, float blockPenalty)
+public static float ScoreCell(ReactionCellStats reactionCellStats, float guardWeight, float blockPenalty)
 {
-    if (s.Uses &lt; 3) return 0f; // cold start
-    float hitRate = (float)s.HitCount / s.Uses;
-    float blockRate = (float)s.BlockedCount / s.Uses;
+    if (reactionCellStats.Uses &lt; 3) return 0f; // cold start
+    float hitRate = (float)reactionCellStats.HitCount / reactionCellStats.Uses;
+    float blockRate = (float)reactionCellStats.BlockedCount / reactionCellStats.Uses;
 
     return (hitRate * 1.0f)
-         + (s.GuardBreakCount * guardWeight / s.Uses)
+         + (reactionCellStats.GuardBreakCount * guardWeight / reactionCellStats.Uses)
          - (blockRate * blockPenalty);
 }</code></pre>
                     </div>
                 </div>
             </section>
 
-            <!-- Block 4: Architecture / Services -->
-            <section class="section" id="architecture">
+            <!-- Block 5: Bandit tactics + контекстний exploration -->
+            <section class="section" id="ai-bandit">
                 <h2>
-                    <span data-i18n="ua">Архітектура сервісів</span>
-                    <span data-i18n="en" hidden>Service architecture</span>
+                    <span data-i18n="ua">Bandit tactics + контекстний exploration</span>
+                    <span data-i18n="en" hidden>Bandit tactics + contextual exploration</span>
                 </h2>
 
                 <div class="card">
                     <p>
-                        <span data-i18n="ua">
-                          Проєкт використовує Service Locator / DI-подібний підхід: сервіси — прості C# класи (без MonoBehaviour),
-                          реєстрація в AppStartup, логування централізоване. Це зменшує зв’язність і полегшує тести.
+                        <span data-i18n="ua">Вибір дій через Thompson Sampling (exploitation) та керований exploration з урахуванням контексту бою.<br>
+                            ШІ поєднує <strong>Thompson Sampling</strong>, <strong>multi-armed bandit навчання</strong>
+                            та <strong>контекстну експлорацію</strong> для адаптації до поведінки гравця
+                            у покроковому бойовому процесі.
+                            <br>
+                            Кожна можлива дія розглядається як окремий “bandit arm” з байєсівською моделлю винагороди.
+                            Knowledge-based пріори керують ранніми рішеннями, а результати бою в реальному часі
+                            постійно оновлюють модель.
+                            <br><br>
+                            <strong>Чому саме такий підхід:</strong><br>
+                            • Навчання без жорстко заскриптованих правил<br>
+                            • Природна робота з невизначеністю та неповними даними<br>
+                            • Добре масштабується з ростом кількості дій і контекстів<br>
+                            • Підходить для solo-розробника завдяки низькому оверхеду
+                            
                         </span>
-                                    <span data-i18n="en" hidden>
-                          The project follows a Service Locator / DI-like approach: services are plain C# classes (no MonoBehaviour),
-                          registered in AppStartup, with centralized logging. This reduces coupling and helps testing.
+                        <span data-i18n="en" hidden>Action selection via Thompson Sampling (exploitation) and guided exploration that adapts to combat context.<br>
+                            The AI combines <strong>Thompson Sampling</strong>, <strong>multi-armed bandit learning</strong>,
+                            and <strong>contextual exploration</strong> to adapt to player behavior in turn-based combat.
+                            <br>
+                            Each possible action is treated as a bandit arm with a Beta-distributed reward model.
+                            Knowledge-based priors guide early decisions, while live combat outcomes continuously update the model.
+                            <br><br>
+                            <strong>Why this approach:</strong><br>
+                            • Learns optimal actions without predefined scripts<br>
+                            • Naturally handles uncertainty and incomplete information<br>
+                            • Scales well with additional actions and combat contexts<br>
+                            • Suitable for single-developer projects due to low overhead
                         </span>
                     </p>
 
                     <div class="code-block">
-<pre><code>public static class AppStartup
+ <pre><code>
+// ------------------------------------------------------------
+// BanditArmStats
+// ------------------------------------------------------------
+// - Each action is modeled as a Beta distribution (alpha, beta)
+// - KnowledgeScore initializes the prior
+// - Live combat results update the distribution
+// - Used by Thompson Sampling for stochastic action selection
+// ------------------------------------------------------------
+
+/// &lt;summary&gt;
+///     Numerical stability threshold to prevent division by zero and log(0)
+/// &lt;/summary&gt;
+private const double Epsilon = 1e-10;
+
+/// &lt;summary&gt;
+///     Optimal shift for Gamma distribution shape to improve generation stability.
+///     Formula: shape - 1/3. This shift makes the asymmetric Gamma distribution
+///     more similar to Gaussian, reducing approximation error.
+/// &lt;/summary&gt;
+private const double GammaShiftFactor = 1.0 / 3.0;
+
+/// &lt;summary&gt;
+///     Gamma rejection test fast-path coefficient.
+///     If u &lt; (1.0 - coefficient * z^4), candidate is accepted without log computation.
+///     This provides fast rejection for extreme z values.
+/// &lt;/summary&gt;
+private const double GammaFastRejectCoefficient = 0.0331;
+
+/// &lt;summary&gt;
+///     Divisor for Gaussian noise strength computation.
+///     Regulates how much Gaussian noise can influence candidate generation.
+///     Formula: c = 1.0 / sqrt(9.0 * d) where d = shape - 1/3
+/// &lt;/summary&gt;
+private const double GaussianNoiseRegulator = 9.0;
+
+/// &lt;summary&gt;
+///     Exponent for forming Gamma candidate via cubic transformation.
+///     Cubing (z^3) creates asymmetry and long tail typical of Gamma distribution.
+/// &lt;/summary&gt;
+private const int GammaCubicExponent = 3;
+
+/// &lt;summary&gt;
+///     Exponent for fast rejection test in Gamma sampling.
+///     Uses z^4 to quickly assess how extreme the Gaussian sample is.
+/// &lt;/summary&gt;
+private const int GammaFastRejectExponent = 4;
+
+/// &lt;summary&gt;
+///     Full rotation in radians for Box-Muller Gaussian transformation.
+///     2π radians = 360 degrees.
+/// &lt;/summary&gt;
+private const double TwoPi = 2.0 * Math.PI;
+
+/// &lt;summary&gt;
+///     Exponent for Box-Muller logarithmic transformation.
+///     sqrt(-2 * ln(u)) → z^2 exponent for the log.
+/// &lt;/summary&gt;
+private const double BoxMullerLogExponent = -2.0;
+
+/// &lt;summary&gt;
+///     Knowledge weight boost when favorKnowledge is true
+/// &lt;/summary&gt;
+private const float KnowledgeBoostFactor = 1.5f;
+
+private readonly IRandomService randomService;
+
+/// &lt;summary&gt;
+///     Selects an action based on Thompson Sampling.
+///     Each action receives a sample from Beta(successCount, failureCount),
+///     the action with max sample is selected.
+/// &lt;/summary&gt;
+/// &lt;param name="armStats"&gt;Action statistics with history of successes/failures&lt;/param&gt;
+/// &lt;returns&gt;Index of the selected action&lt;/returns&gt;
+public int SelectAction(List&lt;BanditArmStats&gt; armStats, bool favorKnowledge)
 {
-    public static void InitializeServices(IServiceLocator services)
+    int selectedIndex = 0;
+    double maxSample = double.MinValue;
+
+    for (int i = 0; i &lt; armStats.Count; i++)
     {
-        services.Register&lt;IRandomService&gt;(new DefaultRandomService());
-        services.Register&lt;IBattleTelemetryService&gt;(new BattleTelemetryService());
-        services.Register&lt;IKnowledgeService&gt;(new KnowledgeService());
+        BanditArmStats stats = armStats[i];
+
+        float knowledgeSuccesses = stats.KnowledgeSuccesses;
+        float knowledgeFailures = stats.KnowledgeFailures;
+        
+        if (favorKnowledge)
+        {
+            // Boost knowledge influence by multiplying priors
+            knowledgeSuccesses *= KnowledgeBoostFactor;
+            knowledgeFailures *= KnowledgeBoostFactor;
+        }
+        
+        float effectiveSuccesses = stats.LearnedSuccesses + knowledgeSuccesses;
+        float effectiveFailures = stats.LearnedFailures + knowledgeFailures;
+        
+        double sample = SampleBeta((int)effectiveSuccesses, (int)effectiveFailures);
+
+        if (sample &gt; maxSample)
+        {
+            maxSample = sample;
+            selectedIndex = i;
+        }
+    }
+
+    return selectedIndex;
+}
+
+/// &lt;summary&gt;
+///     Samples Beta(α, β) distribution via Gamma distribution.
+/// &lt;/summary&gt;
+/// What is the probability that this action is good, given the available experience?
+/// A Beta sample is a controlled random "action rating":
+/// - a single random number from 0 to 1,
+/// - generated based on α and β,
+/// - representing how good the action COULD be right now.
+/// - Small α and β → wide distribution → lots of randomness
+/// - Large α and β → narrow peak → high confidence
+/// - α &gt; β → peak closer to 1
+/// - β &gt; α → peak closer to 0
+/// 
+/// In other words: experience compresses the noise.
+/// α (alpha) = number of successes
+/// β (beta) = number of failures
+private double SampleBeta(int alpha, int beta)
+{
+    double x = SampleGamma(alpha, 1.0);
+    double y = SampleGamma(beta, 1.0);
+    double result = x / (x + y + Epsilon);
+    return Math.Max(0.0, Math.Min(1.0, result));
+}
+
+/// &lt;summary&gt;
+///     Generates a sample from Gamma(shape, scale=1) distribution using Marsaglia-Tsang algorithm.
+///     Numerical stability: For shape &lt; 1.
+/// &lt;/summary&gt;
+/// A Gamma sample is a single positive random number generated so that:
+/// values appear more often where the distribution shape (shape) requires,
+/// and less often where probability is low.
+/// 
+/// A Gamma sample gives a "random weight" with the correct asymmetric form,
+/// which we use as a building block for other distributions.
+/// 
+/// shape (k) — gamma shape
+/// scale (θ) — scale multiplier
+private double SampleGamma(double shape, double scale)
+{
+    if (shape &lt; 1.0)
+    {
+        double u = Math.Max(randomService.NextFloat(), Epsilon);
+        return SampleGamma(shape + 1.0, scale) * Math.Pow(u, 1.0 / shape);
+    }
+
+    // This is the optimal Gamma distribution shift that makes its shape convenient for generation via Gaussian.
+    // Stabilization/optimization (effectively a shift of the gamma distribution shape).
+    // Acceptance: to make asymmetric Gamma more similar to Gaussian.
+    // Shifted left to reduce skew of the "bump".
+    // Needed to minimize approximation error and maximize acceptance rate.
+    double d = shape - GammaShiftFactor;
+
+    // This regulates the Gaussian noise strength, adapting to the Gamma shape so randomness is only as large as safe.
+    // Defines HOW strongly Gaussian noise can "shake" the Gamma shape.
+    // How much noise influences the candidate.
+    double c = 1.0 / Math.Sqrt(GaussianNoiseRegulator * d);
+
+    while (true)
+    {
+        // Can be any number, but most values (≈99%) are near 0.
+        // Provides randomness/noise.
+        double z = GaussianRandom();
+
+        // Build a candidate.
+        // c is always small, so even if z is large we shrink/compress the Gaussian
+        // so that v is &gt; 0 in most cases.
+        double v = 1.0 + c * z;
+
+        if (v &lt;= 0.0)
+        {
+            continue;
+        }
+
+        // Positive candidate with asymmetry.
+        // Cubing creates asymmetry and a long tail.
+        // We take Gaussian noise → shift it → twist it with a cube,
+        // so it starts "pulling to the right" like Gamma, then reject the rest.
+        // v * v * v;
+        v = PowInteger(v, GammaCubicExponent);
+
+        // Uniform(0,1) for accept-reject
+        double u = Math.Max(randomService.NextFloat(), Epsilon);
+
+        // We first roughly form a Gamma-like candidate via Gaussian + cube,
+        // then quickly reject obviously bad values using z^4,
+        // and if uncertain, we perform the exact log-space check.
+        // What passes is a true Gamma sample.
+
+        // Quick estimate of "how extreme z is":
+        // "If Gaussian z is small → we almost certainly accept the candidate"
+        if (u &lt; 1.0 - GammaFastRejectCoefficient * PowInteger(z, GammaFastRejectExponent))
+        {
+            return scale * d * v;
+        }
+
+        // Exact accept-reject in log space (fewer rounding errors)
+        if (Math.Log(u) &lt; 0.5 * PowInteger(z, 2) + d * (1.0 - v + Math.Log(v)))
+        {
+            return scale * d * v;
+        }
+    }
+}
+
+/// &lt;summary&gt;
+///     Box-Muller Gaussian sample (Z ~ N(0,1))
+/// &lt;/summary&gt;
+private double GaussianRandom()
+{
+    // We take two uniform random numbers,
+    // transform them into a random point with the correct density,
+    // and then take its coordinate on the plane.
+    double u1 = randomService.NextFloat();
+    double u2 = randomService.NextFloat();
+
+    // Math.Sqrt(-2.0 * Math.Log(u1 + Epsilon)) * Math.Cos(2.0 * Math.PI * u2);
+    return Math.Sqrt(BoxMullerLogExponent * Math.Log(u1 + Epsilon)) * Math.Cos(TwoPi * u2);
+}
+
+/// &lt;summary&gt;
+///     Computes integer power for performance (avoids Math.Pow for small integer exponents).
+/// &lt;/summary&gt;
+private double PowInteger(double baseValue, int exponent)
+{
+    return exponent switch
+    {
+        2 =&gt; baseValue * baseValue,
+        3 =&gt; baseValue * baseValue * baseValue,
+        4 =&gt; baseValue * baseValue * baseValue * baseValue,
+        _ =&gt; Math.Pow(baseValue, exponent)
+    };
+}
+  </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Block 6: GOAP-lite intent planner + Soft FSM (hysteresis) -->
+            <section class="section" id="ai-intent-fsm">
+                <h2>
+                    <span data-i18n="ua">GOAP-lite intent planner + Soft FSM (hysteresis)</span>
+                    <span data-i18n="en" hidden>GOAP-lite intent planner + Soft FSM (hysteresis)</span>
+                </h2>
+
+                <div class="card">
+                    <p>
+                        <span data-i18n="ua">High-level intent (Pressure/Survive/Punish) обирається утилітарним планером з інерцією,
+                            а Soft FSM стабілізує переходи (поріг, мін/макс стабільність) і має критичні override’и для ключових ситуацій.</span>
+                        <span data-i18n="en" hidden>High-level intent (Pressure/Survive/Punish) is chosen by a utility planner with 
+                            inertia, while a Soft FSM stabilizes transitions (threshold, min/max stability) and applies critical overrides for key situations.</span>
+                    </p>
+
+                    <div class="code-block">
+<pre><code>// GOAP-lite intent planner (utility + inertia)
+public sealed class AiIntentPlanner : IAiIntentPlanner
+{
+    private const float InertiaBonus = 0.10f;
+
+    public IntentPlanResult PlanIntent(CombatContext ctx, KnowledgeSummary k, ActiveIntentState prev)
+    {
+        if (k == null)
+            return IntentPlanResult.DefaultSurvive(ctx); // safe fallback
+
+        float pressure = ScorePressure(ctx, k);
+        float survive  = ScoreSurvive(ctx, k);
+        float punish   = ScorePunish(ctx, k);
+
+        // Inertia: stabilize behavior to avoid “twitchy” intent switching
+        if (prev != null)
+        {
+            if (prev.CurrentIntent == AiIntentType.Pressure) pressure += InertiaBonus;
+            if (prev.CurrentIntent == AiIntentType.Survive)  survive  += InertiaBonus;
+            if (prev.CurrentIntent == AiIntentType.Punish)   punish   += InertiaBonus;
+        }
+
+        pressure = Mathf.Clamp01(pressure);
+        survive  = Mathf.Clamp01(survive);
+        punish   = Mathf.Clamp01(punish);
+
+        AiIntentType best = ArgMax(pressure, survive, punish);
+        return IntentPlanResult.From(best, pressure, survive, punish, ctx);
+    }
+
+    // Score*() methods use context + knowledge (success rates, predictability, repetition…)
+    // Full tuning is intentionally omitted.
+}</code></pre>
+                    </div>
+
+                    <div class="code-block">
+<pre><code>// Soft FSM executor (excerpt): hysteresis + critical overrides
+public sealed class AiSoftFsmExecutor : IAiSoftFsmExecutor
+{
+    private const float TransitionThreshold = 0.15f;
+    private const int MinStableTurns = 2;
+    private const int MaxStableTurns = 8;
+
+    public bool EvaluateTransition(ActiveIntentState state, IntentPlanResult plan,
+        CombatContext ctx, KnowledgeSummary knowledge, int turn)
+    {
+        // Critical overrides first (high-stakes / high-signal situations)
+        if (ctx == CombatContext.AILowHealth)
+            return state.TryTransition(AiIntentType.Survive, turn, &quot;critical_low_hp&quot;);
+
+        if (knowledge != null &amp;&amp; knowledge.PlayerPredictability &gt;= 0.80f &amp;&amp;
+            knowledge.KnowledgeConfidence &gt;= 0.60f &amp;&amp; knowledge.TotalTurns &gt;= 3)
+            return state.TryTransition(AiIntentType.Punish, turn, &quot;critical_high_predictability&quot;);
+
+        // Hysteresis: only switch if the new plan is clearly better and we&#x27;ve been stable long enough
+        if (state.TurnsActive &lt; MinStableTurns)
+            return false;
+
+        float current = plan.UtilityScores[state.CurrentIntent];
+        float target  = plan.UtilityScores[plan.SelectedIntent];
+        if (target - current &gt;= TransitionThreshold)
+            return state.TryTransition(plan.SelectedIntent, turn, $&quot;utility_delta:{target-current:0.00}&quot;);
+
+        // Prevent being stuck forever
+        if (state.TurnsActive &gt;= MaxStableTurns)
+            return state.TryTransition(plan.SelectedIntent, turn, &quot;max_stable_turns&quot;);
+
+        return false;
     }
 }</code></pre>
                     </div>
@@ -282,11 +680,11 @@ public static float ScoreCell(ReactionCellStats s, float guardWeight, float bloc
                 <div class="card">
                     <p>
                         <span data-i18n="ua">
-                          Тут з’являться додаткові приклади: Bandit tactics / GOAP / soft-FSM, UI контролери, тулінг, профілювання,
+                          Тут з’являться додаткові приклади: UI контролери, тулінг, профілювання,
                           та реальні фрагменти з продакшен-коду (у межах того, що можна публічно показувати).
                         </span>
-                                    <span data-i18n="en" hidden>
-                          More samples will be added here: bandit tactics / GOAP / soft-FSM, UI controllers, tooling, profiling,
+                        <span data-i18n="en" hidden>
+                          More samples will be added here: UI controllers, tooling, profiling,
                           and production-ready snippets (within what can be shared publicly).
                         </span>
                     </p>
