@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Carnage Club Wiki</title>
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="wiki/carnage-club-wiki.css">
+
+    <script src="../../i18n.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="nav">
+
+        <a class="brand" href="../../index.html">
+            <span data-i18n="ua">Дмитро</span>
+            <span data-i18n="en" hidden>Dmytro</span>
+        </a>
+
+        <div class="nav-right">
+
+            <a href="../../projects.html" class="projects-btn">
+                <span data-i18n="ua">Проєкти</span>
+                <span data-i18n="en" hidden>Projects</span>
+            </a>
+
+            <div class="lang">
+                <button class="lang-btn" data-lang="ua">UA</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+
+<div class="layout">
+
+    <div class="side side--left"></div>
+
+    <main class="center">
+
+        <div class="container">
+
+            <section class="section card wiki-card">
+
+                <div class="wiki-layout">
+
+                    <aside id="wiki-sidebar"></aside>
+
+                    <article id="wiki-content">
+
+                        Loading...
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <div class="side side--right"></div>
+
+</div>
+
+<script src="wiki/carnage-club-wiki.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+[
+  {
+    "section": "Overview",
+    "pages": [
+      {
+        "title": "Carnage Club Overview",
+        "file": "Carnage-Club-Overview.md"
+      }
+    ]
+  },
+  {
+    "section": "AI System",
+    "pages": [
+      {
+        "title": "AI Architecture Overview",
+        "file": "AI-Architecture-Overview.md"
+      },
+      {
+        "title": "Layer 0: Telemetry System",
+        "file": "Layer-0-Telemetry-System.md"
+      }
+    ]
+  }
+]
