@@ -88,21 +88,27 @@ function fixRelativePaths(container) {
     })
 }
 
+function createLightboxMedia(src, alt) {
+    if (isSvg(src)) {
+        const object = document.createElement("object")
+        object.setAttribute("data", src)
+        object.setAttribute("type", "image/svg+xml")
+        object.setAttribute("aria-label", alt || "SVG preview")
+        object.className = "wiki-lightbox-svg"
+        return object
+    }
+
+    const img = document.createElement("img")
+    img.src = src
+    img.alt = alt || ""
+    return img
+}
+
 function initImageLightbox() {
     CONTENT.querySelectorAll("img").forEach(img => {
         img.addEventListener("click", () => {
-            if (isSvg(img.src)) {
-                window.open(img.src, "_blank", "noopener,noreferrer")
-                return
-            }
-
             LIGHTBOX_MEDIA.innerHTML = ""
-
-            const preview = document.createElement("img")
-            preview.src = img.src
-            preview.alt = img.alt || ""
-
-            LIGHTBOX_MEDIA.appendChild(preview)
+            LIGHTBOX_MEDIA.appendChild(createLightboxMedia(img.src, img.alt || ""))
             LIGHTBOX.hidden = false
             document.body.style.overflow = "hidden"
         })
@@ -239,6 +245,7 @@ function buildSidebar(data) {
 
             link.addEventListener("click", (e) => {
                 e.preventDefault()
+                e.stopPropagation()
                 navigate(p.file)
             })
 
