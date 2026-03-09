@@ -1,9 +1,6 @@
 const SIDEBAR = document.getElementById("wiki-sidebar")
 const CONTENT = document.getElementById("wiki-content")
 
-const MOBILE_TOGGLE = document.getElementById("wiki-mobile-toggle")
-const OVERLAY = document.getElementById("wiki-sidebar-overlay")
-
 const LIGHTBOX = document.getElementById("wiki-lightbox")
 const LIGHTBOX_IMAGE = document.getElementById("wiki-lightbox-image")
 const LIGHTBOX_CLOSE = document.getElementById("wiki-lightbox-close")
@@ -20,21 +17,10 @@ function getPage() {
     return params.get("page")
 }
 
-function closeMobileSidebar() {
-    SIDEBAR.classList.remove("open")
-    OVERLAY.classList.remove("visible")
-}
-
-function openMobileSidebar() {
-    SIDEBAR.classList.add("open")
-    OVERLAY.classList.add("visible")
-}
-
 function navigate(page) {
     history.pushState(null, null, "?page=" + encodeURIComponent(page))
     loadPage(page)
     highlight(page)
-    closeMobileSidebar()
 }
 
 function isExternalLink(value) {
@@ -92,58 +78,6 @@ function closeLightbox() {
     document.body.style.overflow = ""
 }
 
-function initMobileSidebar() {
-    if (!MOBILE_TOGGLE) {
-        return
-    }
-
-    MOBILE_TOGGLE.addEventListener("click", () => {
-        openMobileSidebar()
-    })
-
-    OVERLAY.addEventListener("click", () => {
-        closeMobileSidebar()
-    })
-}
-
-function initLanguageButtons() {
-    const buttons = document.querySelectorAll(".lang-btn")
-    if (!buttons.length) {
-        return
-    }
-
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            const lang = button.dataset.lang
-            if (!lang) {
-                return
-            }
-
-            localStorage.setItem("lang", lang)
-
-            if (typeof window.setLanguage === "function") {
-                window.setLanguage(lang)
-            } else if (typeof window.applyLanguage === "function") {
-                window.applyLanguage(lang)
-            }
-        })
-    })
-
-    const currentLang = localStorage.getItem("lang") || "ua"
-
-    if (typeof window.setLanguage === "function") {
-        window.setLanguage(currentLang)
-    } else if (typeof window.applyLanguage === "function") {
-        window.applyLanguage(currentLang)
-    }
-
-    buttons.forEach(button => {
-        const isActive = button.dataset.lang === currentLang
-        button.setAttribute("aria-pressed", isActive ? "true" : "false")
-        button.classList.toggle("is-active", isActive)
-    })
-}
-
 async function loadPage(page) {
     try {
         const res = await fetch(WIKI_PATH + page)
@@ -159,10 +93,8 @@ async function loadPage(page) {
 
         fixRelativePaths(CONTENT)
         initImageLightbox()
-        closeMobileSidebar()
     } catch {
         CONTENT.innerHTML = "<h2>Page not found</h2>"
-        closeMobileSidebar()
     }
 }
 
@@ -220,7 +152,6 @@ LIGHTBOX.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !LIGHTBOX.hidden) {
         closeLightbox()
-        closeMobileSidebar()
     }
 })
 
@@ -240,8 +171,6 @@ async function init() {
     const manifest = await loadManifest()
 
     buildSidebar(manifest)
-    initMobileSidebar()
-    initLanguageButtons()
 
     let page = getPage()
 
