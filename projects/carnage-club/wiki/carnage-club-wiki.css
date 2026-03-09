@@ -189,8 +189,7 @@
     max-height:95vh;
 }
 
-.wiki-lightbox__media img,
-.wiki-lightbox__media object{
+.wiki-lightbox__media img{
     display:block;
     max-width:95vw;
     max-height:95vh;
@@ -199,11 +198,6 @@
     border-radius:10px;
     box-shadow:0 20px 60px rgba(0,0,0,0.5);
     background:#111;
-}
-
-.wiki-lightbox__media object{
-    width:min(95vw, 1400px);
-    height:min(95vh, 1000px);
 }
 
 .wiki-lightbox__close{
@@ -230,6 +224,7 @@
 @media (max-width:900px){
     .wiki-card{
         border-radius:16px;
+        overflow:visible;
     }
 
     .wiki-mobile-toggle{
@@ -253,15 +248,24 @@
         padding:16px;
         overflow-y:auto;
         overflow-x:hidden;
+        box-sizing:border-box;
         background:#131720;
         z-index:1001;
-        transform:translateX(-100%);
+        transform:translateX(-105%);
         transition:transform .25s ease;
         pointer-events:none;
+        touch-action:auto;
+        -webkit-overflow-scrolling:touch;
     }
 
     #wiki-sidebar.open{
         transform:translateX(0);
+        pointer-events:auto;
+    }
+
+    #wiki-sidebar .sidebar-link,
+    #wiki-sidebar .sidebar-title,
+    #wiki-sidebar .sidebar-section{
         pointer-events:auto;
     }
 
@@ -278,6 +282,7 @@
     }
 
     #wiki-content{
+        display:block;
         width:auto;
         min-width:0;
         max-width:100%;
@@ -326,15 +331,9 @@
         padding:12px;
     }
 
-    .wiki-lightbox__media img,
-    .wiki-lightbox__media object{
+    .wiki-lightbox__media img{
         max-width:100%;
         max-height:90vh;
-    }
-
-    .wiki-lightbox__media object{
-        width:96vw;
-        height:88vh;
     }
 
     .wiki-lightbox__close{

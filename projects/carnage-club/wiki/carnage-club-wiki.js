@@ -21,13 +21,23 @@ function getPage() {
 }
 
 function closeMobileSidebar() {
+    if (!SIDEBAR || !OVERLAY) {
+        return
+    }
+
     SIDEBAR.classList.remove("open")
     OVERLAY.classList.remove("visible")
+    document.body.classList.remove("wiki-mobile-sidebar-open")
 }
 
 function openMobileSidebar() {
+    if (!SIDEBAR || !OVERLAY) {
+        return
+    }
+
     SIDEBAR.classList.add("open")
     OVERLAY.classList.add("visible")
+    document.body.classList.add("wiki-mobile-sidebar-open")
 }
 
 function navigate(page) {
@@ -78,26 +88,21 @@ function fixRelativePaths(container) {
     })
 }
 
-function createLightboxMedia(src, alt) {
-    if (isSvg(src)) {
-        const object = document.createElement("object")
-        object.setAttribute("data", src)
-        object.setAttribute("type", "image/svg+xml")
-        object.setAttribute("aria-label", alt || "SVG preview")
-        return object
-    }
-
-    const img = document.createElement("img")
-    img.src = src
-    img.alt = alt || ""
-    return img
-}
-
 function initImageLightbox() {
     CONTENT.querySelectorAll("img").forEach(img => {
         img.addEventListener("click", () => {
+            if (isSvg(img.src)) {
+                window.open(img.src, "_blank", "noopener,noreferrer")
+                return
+            }
+
             LIGHTBOX_MEDIA.innerHTML = ""
-            LIGHTBOX_MEDIA.appendChild(createLightboxMedia(img.src, img.alt || ""))
+
+            const preview = document.createElement("img")
+            preview.src = img.src
+            preview.alt = img.alt || ""
+
+            LIGHTBOX_MEDIA.appendChild(preview)
             LIGHTBOX.hidden = false
             document.body.style.overflow = "hidden"
         })
@@ -111,7 +116,7 @@ function closeLightbox() {
 }
 
 function initMobileSidebar() {
-    if (!MOBILE_TOGGLE) {
+    if (!MOBILE_TOGGLE || !SIDEBAR || !OVERLAY) {
         return
     }
 
@@ -232,10 +237,10 @@ function buildSidebar(data) {
             link.href = "?page=" + encodeURIComponent(p.file)
             link.dataset.page = p.file
 
-            link.onclick = (e) => {
+            link.addEventListener("click", (e) => {
                 e.preventDefault()
                 navigate(p.file)
-            }
+            })
 
             block.appendChild(link)
         })
