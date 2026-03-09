@@ -1,6 +1,10 @@
 const SIDEBAR = document.getElementById("wiki-sidebar")
 const CONTENT = document.getElementById("wiki-content")
 
+const LIGHTBOX = document.getElementById("wiki-lightbox")
+const LIGHTBOX_IMAGE = document.getElementById("wiki-lightbox-image")
+const LIGHTBOX_CLOSE = document.getElementById("wiki-lightbox-close")
+
 const WIKI_PATH = "wiki/"
 
 async function loadManifest() {
@@ -23,16 +27,18 @@ function isExternalLink(value) {
     return /^(https?:|mailto:|tel:|#|\/)/i.test(value)
 }
 
-function fixRelativePaths(container, page) {
-    const pageDir = WIKI_PATH
+function isMdFile(value) {
+    return /\.md($|[?#])/i.test(value)
+}
 
+function fixRelativePaths(container) {
     container.querySelectorAll("img").forEach(img => {
         const src = img.getAttribute("src")
         if (!src || isExternalLink(src)) {
             return
         }
 
-        img.setAttribute("src", pageDir + src)
+        img.setAttribute("src", WIKI_PATH + src)
     })
 
     container.querySelectorAll("a").forEach(link => {
@@ -41,7 +47,7 @@ function fixRelativePaths(container, page) {
             return
         }
 
-        if (href.endsWith(".md")) {
+        if (isMdFile(href)) {
             link.setAttribute("href", "?page=" + encodeURIComponent(href))
             link.addEventListener("click", (e) => {
                 e.preventDefault()
@@ -50,8 +56,26 @@ function fixRelativePaths(container, page) {
             return
         }
 
-        link.setAttribute("href", pageDir + href)
+        link.setAttribute("href", WIKI_PATH + href)
     })
+}
+
+function initImageLightbox() {
+    CONTENT.querySelectorAll("img").forEach(img => {
+        img.addEventListener("click", () => {
+            LIGHTBOX_IMAGE.src = img.src
+            LIGHTBOX_IMAGE.alt = img.alt || ""
+            LIGHTBOX.hidden = false
+            document.body.style.overflow = "hidden"
+        })
+    })
+}
+
+function closeLightbox() {
+    LIGHTBOX.hidden = true
+    LIGHTBOX_IMAGE.src = ""
+    LIGHTBOX_IMAGE.alt = ""
+    document.body.style.overflow = ""
 }
 
 async function loadPage(page) {
@@ -66,7 +90,9 @@ async function loadPage(page) {
         const html = DOMPurify.sanitize(marked.parse(md))
 
         CONTENT.innerHTML = html
-        fixRelativePaths(CONTENT, page)
+
+        fixRelativePaths(CONTENT)
+        initImageLightbox()
     } catch {
         CONTENT.innerHTML = "<h2>Page not found</h2>"
     }
@@ -115,6 +141,32 @@ function buildSidebar(data) {
     })
 }
 
+LIGHTBOX_CLOSE.addEventListener("click", closeLightbox)
+
+LIGHTBOX.addEventListener("click", (e) => {
+    if (e.target === LIGHTBOX) {
+        closeLightbox()
+    }
+})
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !LIGHTBOX.hidden) {
+        closeLightbox()
+    }
+})
+
+window.addEventListener("popstate", async () => {
+    let page = getPage()
+
+    if (!page) {
+        const manifest = await loadManifest()
+        page = manifest[0].pages[0].file
+    }
+
+    await loadPage(page)
+    highlight(page)
+})
+
 async function init() {
     const manifest = await loadManifest()
 
@@ -129,17 +181,5 @@ async function init() {
     await loadPage(page)
     highlight(page)
 }
-
-window.addEventListener("popstate", async () => {
-    let page = getPage()
-
-    if (!page) {
-        const manifest = await loadManifest()
-        page = manifest[0].pages[0].file
-    }
-
-    await loadPage(page)
-    highlight(page)
-})
 
 init()
