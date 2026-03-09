@@ -5,7 +5,7 @@ const MOBILE_TOGGLE = document.getElementById("wiki-mobile-toggle")
 const OVERLAY = document.getElementById("wiki-sidebar-overlay")
 
 const LIGHTBOX = document.getElementById("wiki-lightbox")
-const LIGHTBOX_IMAGE = document.getElementById("wiki-lightbox-image")
+const LIGHTBOX_MEDIA = document.getElementById("wiki-lightbox-media")
 const LIGHTBOX_CLOSE = document.getElementById("wiki-lightbox-close")
 
 const WIKI_PATH = "wiki/"
@@ -45,6 +45,10 @@ function isMdFile(value) {
     return /\.md($|[?#])/i.test(value)
 }
 
+function isSvg(value) {
+    return /\.svg($|[?#])/i.test(value)
+}
+
 function fixRelativePaths(container) {
     container.querySelectorAll("img").forEach(img => {
         const src = img.getAttribute("src")
@@ -74,11 +78,26 @@ function fixRelativePaths(container) {
     })
 }
 
+function createLightboxMedia(src, alt) {
+    if (isSvg(src)) {
+        const object = document.createElement("object")
+        object.setAttribute("data", src)
+        object.setAttribute("type", "image/svg+xml")
+        object.setAttribute("aria-label", alt || "SVG preview")
+        return object
+    }
+
+    const img = document.createElement("img")
+    img.src = src
+    img.alt = alt || ""
+    return img
+}
+
 function initImageLightbox() {
     CONTENT.querySelectorAll("img").forEach(img => {
         img.addEventListener("click", () => {
-            LIGHTBOX_IMAGE.src = img.src
-            LIGHTBOX_IMAGE.alt = img.alt || ""
+            LIGHTBOX_MEDIA.innerHTML = ""
+            LIGHTBOX_MEDIA.appendChild(createLightboxMedia(img.src, img.alt || ""))
             LIGHTBOX.hidden = false
             document.body.style.overflow = "hidden"
         })
@@ -87,8 +106,7 @@ function initImageLightbox() {
 
 function closeLightbox() {
     LIGHTBOX.hidden = true
-    LIGHTBOX_IMAGE.src = ""
-    LIGHTBOX_IMAGE.alt = ""
+    LIGHTBOX_MEDIA.innerHTML = ""
     document.body.style.overflow = ""
 }
 
@@ -103,6 +121,15 @@ function initMobileSidebar() {
 
     OVERLAY.addEventListener("click", () => {
         closeMobileSidebar()
+    })
+}
+
+function setActiveLangButton(lang) {
+    const buttons = document.querySelectorAll(".lang-btn")
+    buttons.forEach(button => {
+        const isActive = button.dataset.lang === lang
+        button.setAttribute("aria-pressed", isActive ? "true" : "false")
+        button.classList.toggle("is-active", isActive)
     })
 }
 
@@ -125,7 +152,14 @@ function initLanguageButtons() {
                 window.setLanguage(lang)
             } else if (typeof window.applyLanguage === "function") {
                 window.applyLanguage(lang)
+            } else {
+                document.querySelectorAll("[data-i18n]").forEach(node => {
+                    const nodeLang = node.getAttribute("data-i18n")
+                    node.hidden = nodeLang !== lang
+                })
             }
+
+            setActiveLangButton(lang)
         })
     })
 
@@ -135,13 +169,14 @@ function initLanguageButtons() {
         window.setLanguage(currentLang)
     } else if (typeof window.applyLanguage === "function") {
         window.applyLanguage(currentLang)
+    } else {
+        document.querySelectorAll("[data-i18n]").forEach(node => {
+            const nodeLang = node.getAttribute("data-i18n")
+            node.hidden = nodeLang !== currentLang
+        })
     }
 
-    buttons.forEach(button => {
-        const isActive = button.dataset.lang === currentLang
-        button.setAttribute("aria-pressed", isActive ? "true" : "false")
-        button.classList.toggle("is-active", isActive)
-    })
+    setActiveLangButton(currentLang)
 }
 
 async function loadPage(page) {
@@ -220,6 +255,9 @@ LIGHTBOX.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !LIGHTBOX.hidden) {
         closeLightbox()
+    }
+
+    if (e.key === "Escape") {
         closeMobileSidebar()
     }
 })
