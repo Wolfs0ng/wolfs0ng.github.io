@@ -1,0 +1,153 @@
+[
+  {
+    "section": "Overview",
+    "pages": [
+      {
+        "title": "Carnage Club Overview",
+        "file": "01-carnage-club-overview.md"
+      }
+    ]
+  },
+  {
+    "section": "Architecture & Design Principles",
+    "pages": [
+      {
+        "title": "Service Locator Pattern",
+        "file": "02-service-locator-pattern.md"
+      },
+      {
+        "title": "Data Flow & State Management",
+        "file": "03-data-flow-state-management.md"
+      },
+      {
+        "title": "Architecture & Design Principles",
+        "file": "04-architecture-design-principles.md"
+      }
+    ]
+  },
+  {
+    "section": "AI System",
+    "pages": [
+      {
+        "title": "AI Architecture Overview",
+        "file": "05-ai-architecture-overview.md"
+      },
+      {
+        "title": "Layer 0: Telemetry System",
+        "file": "06-layer-0-telemetry-system.md"
+      },
+      {
+        "title": "Layers 1-2: Knowledge Systems",
+        "file": "07-layers-1-2-knowledge-systems.md"
+      },
+      {
+        "title": "Layer 3: Tactical Decision System",
+        "file": "08-layer-3-tactical-decision-system.md"
+      },
+      {
+        "title": "Layer 4: Strategic Intent & Planning",
+        "file": "09-layer-4-strategic-intent-planning.md"
+      },
+      {
+        "title": "Layer 5: Emotion System",
+        "file": "10-layer-5-emotion-system.md"
+      },
+      {
+        "title": "AI System",
+        "file": "11-ai-system.md"
+      }
+    ]
+  },
+  {
+    "section": "Core Systems",
+    "pages": [
+      {
+        "title": "Game State Manager",
+        "file": "12-game-state-manager.md"
+      },
+      {
+        "title": "Event Service & Communication",
+        "file": "13-event-service-communication.md"
+      },
+      {
+        "title": "Save & Load System",
+        "file": "14-save-load-system.md"
+      },
+      {
+        "title": "Core Systems",
+        "file": "15-core-systems.md"
+      }
+    ]
+  },
+  {
+    "section": "Battle System",
+    "pages": [
+      {
+        "title": "Battle Flow & Turn Management",
+        "file": "16-battle-flow-turn-management.md"
+      },
+      {
+        "title": "Round Resolution & Combat Mechanics",
+        "file": "17-round-resolution-combat-mechanics.md"
+      },
+      {
+        "title": "Attack Resolution & Damage System",
+        "file": "18-attack-resolution-damage-system.md"
+      },
+      {
+        "title": "Battle UI & Combat Log",
+        "file": "19-battle-ui-combat-log.md"
+      },
+      {
+        "title": "Battle System",
+        "file": "20-battle-system.md"
+      }
+    ]
+  },
+  {
+    "section": "Gameplay Mechanics",
+    "pages": [
+      {
+        "title": "Combat Rules & Mechanics",
+        "file": "31-combat-rules-mechanics.md"
+      },
+      {
+        "title": "Character Progression",
+        "file": "32-character-progression.md"
+      },
+      {
+        "title": "Nemesis System",
+        "file": "33-nemesis-system.md"
+      },
+      {
+        "title": "Gameplay Mechanics",
+        "file": "34-gameplay-mechanics.md"
+      }
+    ]
+  },
+  {
+    "section": "Development",
+    "pages": [
+      {
+        "title": "Coding Standards & Patterns",
+        "file": "35-coding-standards-patterns.md"
+      },
+      {
+        "title": "Testing & Debugging AI Systems",
+        "file": "36-testing-debugging-ai-systems.md"
+      },
+      {
+        "title": "Adding New Map Elements",
+        "file": "37-adding-new-map-elements.md"
+      },
+      {
+        "title": "Extending the AI System",
+        "file": "38-extending-the-ai-system.md"
+      },
+      {
+        "title": "Development Guide",
+        "file": "39-development-guide.md"
+      }
+    ]
+  }
+]
