@@ -3,6 +3,21 @@
     overflow:hidden;
 }
 
+.wiki-mobile-toggle{
+    display:none;
+    width:100%;
+    margin:0;
+    padding:12px 16px;
+    border:none;
+    border-bottom:1px solid var(--border);
+    background:rgba(255,255,255,0.02);
+    color:var(--text);
+    font:inherit;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
+}
+
 .wiki-layout{
     display:grid;
     grid-template-columns:260px minmax(0,1fr);
@@ -193,13 +208,114 @@
     border:1px solid rgba(255,255,255,0.12);
 }
 
+#wiki-sidebar-overlay{
+    display:none;
+}
+
 @media (max-width:900px){
+    .wiki-card{
+        border-radius:16px;
+    }
+
+    .wiki-mobile-toggle{
+        display:block;
+    }
+
     .wiki-layout{
-        grid-template-columns:1fr;
+        display:block !important;
+        min-height:auto;
     }
 
     #wiki-sidebar{
-        border-right:none;
-        border-bottom:1px solid var(--border);
+        position:fixed;
+        left:0;
+        top:0;
+        bottom:0;
+        width:min(82vw,320px);
+        max-width:320px;
+        border-right:1px solid var(--border);
+        border-bottom:none;
+        padding:16px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        background:var(--panel);
+        z-index:1001;
+        transform:translateX(-100%);
+        transition:transform .25s ease;
+    }
+
+    #wiki-sidebar.open{
+        transform:translateX(0);
+    }
+
+    #wiki-sidebar-overlay{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.48);
+        z-index:1000;
+        display:none;
+    }
+
+    #wiki-sidebar-overlay.visible{
+        display:block;
+    }
+
+    #wiki-content{
+        width:auto;
+        min-width:0;
+        max-width:100%;
+        padding:18px 16px 20px;
+    }
+
+    .sidebar-title{
+        font-size:11px;
+        margin-bottom:8px;
+    }
+
+    .sidebar-link{
+        font-size:13px;
+        padding:8px 10px;
+        margin-bottom:3px;
+    }
+
+    #wiki-content h1{
+        font-size:32px;
+        line-height:1.1;
+    }
+
+    #wiki-content h2{
+        font-size:24px;
+        line-height:1.15;
+    }
+
+    #wiki-content h3{
+        font-size:20px;
+        line-height:1.2;
+    }
+
+    #wiki-content p,
+    #wiki-content li,
+    #wiki-content a,
+    #wiki-content code{
+        font-size:15px;
+    }
+
+    #wiki-content pre{
+        padding:12px;
+        font-size:13px;
+    }
+
+    .wiki-lightbox{
+        padding:12px;
+    }
+
+    .wiki-lightbox__image{
+        max-width:100%;
+        max-height:90vh;
+    }
+
+    .wiki-lightbox__close{
+        top:8px;
+        right:8px;
     }
 }
