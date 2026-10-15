@@ -1,0 +1,286 @@
+{
+  "groups": {
+    "start": {
+      "ua": "Знайомство",
+      "en": "Introduction"
+    },
+    "combat": {
+      "ua": "Тактичні дуелі",
+      "en": "Tactical duels"
+    },
+    "character": {
+      "ua": "Розвиток героя",
+      "en": "Character development"
+    },
+    "equipment": {
+      "ua": "Спорядження",
+      "en": "Equipment"
+    },
+    "opponents": {
+      "ua": "Супротивники",
+      "en": "Opponents"
+    },
+    "world": {
+      "ua": "Світ і подорож",
+      "en": "World & exploration"
+    },
+    "help": {
+      "ua": "Розуміння гри",
+      "en": "Understanding the game"
+    }
+  },
+  "pages": [
+    {
+      "slug": "01-gdd",
+      "group": "start",
+      "ua": {
+        "title": "Що таке Carnage Club",
+        "summary": "Покрокова RPG для мобільних пристроїв: тактичні дуелі, власний бойовий стиль і похмурий світ, який поступово відкривається гравцеві.",
+        "body": "<h2>Основна ідея</h2><p>Carnage Club поєднує дуелі один на один, розвиток героя й дослідження занепалого ордену мисливців. У центрі гри — обмін рішеннями: ти спостерігаєш за ворогом, а він накопичує досвід твоїх дій.</p><p><strong>Світ пам’ятає твої звички.</strong> Знайома тактика може залишатися корисною, але повторення робить тебе передбачуванішим. Власний білд, управління ресурсами та уважність до попереднього раунду працюють разом.</p><h2>Як проходить гра</h2><ol><li><strong>Досліджуй.</strong> Переміщуйся картою, знаходь зустрічі й відкривай доступні маршрути.</li><li><strong>Готуй героя.</strong> Поєднуй спорядження, атрибути, здібності та перки.</li><li><strong>Приймай рішення в дуелі.</strong> Обирай напрямки атаки й захисту, стеж за ресурсами.</li><li><strong>Осмислюй результат.</strong> Журнал показує наслідки дій і дає підстави змінити наступний хід.</li></ol><h2>Три опори досвіду</h2><ul><li><a href=\"02-combat.html\">Тактичні дуелі</a>: значення має поєднання рішень обох учасників.</li><li><a href=\"08-progression.html\">Власний білд</a>: різні інструменти підтримують різні способи гри.</li><li><a href=\"17-world.html\">Атмосфера й відкриття</a>: світ розкривається через зустрічі, предмети та діалоги.</li></ul><h2>Про цю Wiki</h2><p>Це публічне знайомство з грою, яка перебуває в розробці. Тут можна зрозуміти її основні механіки, не розкриваючи сюжетних таємниць. Зображення показують поточну версію; деталі можуть змінюватися під час розробки.</p>"
+      },
+      "en": {
+        "title": "What is Carnage Club?",
+        "summary": "A mobile turn-based RPG about tactical duels, finding your own fighting style, and discovering a dark world at your own pace.",
+        "body": "<h2>The core idea</h2><p>Carnage Club combines one-on-one duels, character development, and exploration of a fallen hunters’ order. At its heart is an exchange of decisions: you observe the opponent while it gains experience from your actions.</p><p><strong>The world remembers your habits.</strong> Familiar tactics can remain useful, but repetition makes you more predictable. Your build, resource management, and attention to the previous round work together.</p><h2>The game loop</h2><ol><li><strong>Explore.</strong> Move across the map, find encounters, and discover available routes.</li><li><strong>Prepare.</strong> Combine equipment, attributes, abilities, and perks.</li><li><strong>Decide.</strong> Choose attack and defense directions and keep track of your resources.</li><li><strong>Reflect.</strong> The battle log explains the outcome and helps you reconsider the next turn.</li></ol><h2>Three pillars</h2><ul><li><a href=\"02-combat.html\">Tactical duels</a>: the choices of both participants shape the result.</li><li><a href=\"08-progression.html\">Your own build</a>: different tools support different ways of playing.</li><li><a href=\"17-world.html\">Atmosphere and discovery</a>: encounters, items, and dialogue gradually reveal the world.</li></ul><h2>About this guide</h2><p>This is a public introduction to a game in development. It explains the main mechanics while leaving the story’s discoveries in the game. Screens show the current version; details may change during development.</p>"
+      }
+    },
+    {
+      "slug": "02-combat",
+      "group": "combat",
+      "ua": {
+        "title": "Як працює дуель",
+        "summary": "Бій складається з раундів: обидва учасники атакують, захищаються й отримують результат своїх рішень.",
+        "body": "<h2>Рішення перед дією</h2><p>У кожному раунді ти визначаєш напрямки атаки та захисту. Також обираєш тип захисту й, коли це доречно, активну здібність. Ворог робить власний вибір; під час виконання дій ці рішення зустрічаються.</p><p>Дуель залишає час на обдумування. Потрібно врахувати стан героя, можливості зброї та поведінку супротивника, яку вже вдалося побачити.</p><h2>Що визначає результат</h2><p>Напрямок удару перевіряється проти відповідного захисту. Незахищена зона, блок і парирування створюють різні наслідки для здоров’я, захисної стійки й витривалості. Здібності, перки та статуси можуть доповнювати обмін.</p><p>Важливо оцінювати весь раунд: вдалий власний удар ще не пояснює, що сталося у відповідь.</p><h2>Що залишається після раунду</h2><p>Змінені ресурси й активні ефекти впливають на наступне рішення. <a href=\"07-battle-log.html\">Бойовий журнал</a> показує, які дії відбулися, а <a href=\"14-adaptive-opponents.html\">адаптивний супротивник</a> враховує накопичений досвід.</p><p>Далі: <a href=\"03-directions.html\">напрямки</a>, <a href=\"04-block-parry.html\">Block і Parry</a>, <a href=\"05-resources.html\">бойові ресурси</a>.</p>"
+      },
+      "en": {
+        "title": "How a duel works",
+        "summary": "Combat unfolds in rounds: both participants attack, defend, and see the consequences of their choices.",
+        "body": "<h2>Decisions before action</h2><p>Each round, you choose attack and defense directions. You also select a defense type and, when appropriate, an active ability. The opponent makes its own choices; resolution brings these decisions together.</p><p>The turn-based format gives you time to think. Consider the hunter’s condition, the options provided by equipment, and the behavior you have already observed.</p><h2>What shapes the outcome</h2><p>An attack direction meets the corresponding defense. An uncovered zone, a block, and a parry produce different consequences for health, defensive guard, and stamina. Abilities, perks, and status effects can add to the exchange.</p><p>Consider the whole round: landing your own attack does not explain what happened in return.</p><h2>What carries into the next round</h2><p>Changed resources and active effects influence the next decision. The <a href=\"07-battle-log.html\">battle log</a> explains the actions, while the <a href=\"14-adaptive-opponents.html\">adaptive opponent</a> draws on its accumulated experience.</p><p>Continue with <a href=\"03-directions.html\">directions</a>, <a href=\"04-block-parry.html\">Block and Parry</a>, and <a href=\"05-resources.html\">combat resources</a>.</p>"
+      }
+    },
+    {
+      "slug": "03-directions",
+      "group": "combat",
+      "ua": {
+        "title": "Напрямки атаки й захисту",
+        "summary": "Чотири зони перетворюють атаку й захист на конкретний вибір.",
+        "body": "<h2>Чотири зони</h2><p>Дуель використовує голову, груди, живіт і ноги. В інтерфейсі їм відповідають Head, Torso, Belly та Legs. Обрані напрямки визначають, куди спрямовано удар і які зони перекриває захист.</p><h2>Можливості залежать від білда</h2><p>Кількість доступних напрямків залежить від бойових можливостей героя та його спорядження. Атака, Block і Parry мають власне покриття: можливість захистити кілька зон одним способом не означає таке саме покриття іншим.</p><p>Саме тому нова зброя може змінити характер дуелі, навіть коли її перевага не зводиться до величини шкоди.</p><h2>Спостереження має значення</h2><p>Попередній раунд дає інформацію про вибір супротивника. Водночас ворог набуває досвіду твоїх дій. Напрямки пов’язують цю взаємну увагу з рішенням, яке ти приймаєш зараз.</p><p>Пов’язане: <a href=\"04-block-parry.html\">типи захисту</a> та <a href=\"13-weapon-styles.html\">стилі зброї</a>.</p>"
+      },
+      "en": {
+        "title": "Attack & defense directions",
+        "summary": "Four zones turn attacking and defending into specific choices.",
+        "body": "<h2>Four zones</h2><p>A duel uses four zones: Head, Torso, Belly, and Legs. Your chosen directions determine where an attack is aimed and which zones a defense covers.</p><h2>Your build defines the options</h2><p>The number of available directions depends on combat capabilities and equipment. Attack, Block, and Parry have their own coverage. Covering several zones with one type of defense does not imply identical coverage with another.</p><p>This is one reason a new weapon can change the feel of a duel beyond the damage it deals.</p><h2>Observation matters</h2><p>The previous round gives you information about the opponent’s choices. At the same time, it gains experience from yours. Directions connect that mutual observation to the decision in front of you.</p><p>Related: <a href=\"04-block-parry.html\">defense types</a> and <a href=\"13-weapon-styles.html\">weapon styles</a>.</p>"
+      }
+    },
+    {
+      "slug": "04-block-parry",
+      "group": "combat",
+      "ua": {
+        "title": "Block і Parry",
+        "summary": "Два способи захисту з різними ресурсами, покриттям і можливостями відповіді.",
+        "body": "<h2>Block: прийняти тиск</h2><p>Блок пов’язаний із Guard — стійкістю захисту. Він дає змогу приймати удари по перекритих зонах, але тривалий тиск виснажує захисний ресурс.</p><p>Коли Guard зламано, подальші наслідки удару можуть торкнутися здоров’я. Вибір блоку потрібно розглядати разом із поточним станом героя.</p><h2>Parry: перехопити й відповісти</h2><p>Парирування використовує Stamina. За успішного перехоплення воно дозволяє відповісти контратакою. Покриття Parry визначається окремо від Block, а на можливості відповіді впливають спорядження та ефекти.</p><h2>Чому потрібні обидва</h2><p>Тип захисту — частина білда й рішення на конкретний раунд. Важать доступні напрямки, запас ресурсів і взаємодії перків або здібностей. Один і той самий герой може по-різному оцінювати ці варіанти протягом бою.</p><p>Докладніше: <a href=\"05-resources.html\">Health, Guard і Stamina</a>, <a href=\"11-perks.html\">перки</a>.</p>"
+      },
+      "en": {
+        "title": "Block & Parry",
+        "summary": "Two defense types with different resources, coverage, and opportunities to respond.",
+        "body": "<h2>Block: withstand pressure</h2><p>Blocking is tied to Guard, the resource behind your defensive stance. It lets you meet attacks in covered zones, but sustained pressure wears that protection down.</p><p>When Guard breaks, the consequences of an attack can reach Health. Consider blocking alongside the hunter’s current condition.</p><h2>Parry: intercept and answer</h2><p>Parrying uses Stamina. A successful interception allows a counterattack. Parry coverage is defined separately from Block, while equipment and effects influence the opportunities it creates.</p><h2>Why both matter</h2><p>Defense is part of your build and a decision for the current round. Available directions, resources, perks, and abilities all matter. The same hunter can value these options differently as a fight develops.</p><p>Continue with <a href=\"05-resources.html\">Health, Guard, and Stamina</a> and <a href=\"11-perks.html\">perks</a>.</p>"
+      }
+    },
+    {
+      "slug": "05-resources",
+      "group": "combat",
+      "ua": {
+        "title": "Health, Guard і Stamina",
+        "summary": "Три ресурси створюють різні способи тиску та визначають можливості наступного раунду.",
+        "body": "<h2>Health — здоров’я</h2><p>Здоров’я визначає, чи залишається учасник у дуелі. Незахищені удари й деякі ефекти загрожують йому безпосередньо. Інші механіки дають змогу відновлювати Health у межах можливостей героя.</p><h2>Guard — стійкість захисту</h2><p>Guard підтримує блок і здатність витримувати тиск. Поступове руйнування стійки змінює ситуацію навіть тоді, коли запас здоров’я ще здається достатнім. Пробиття Guard робить подальший обмін небезпечнішим.</p><h2>Stamina — витривалість</h2><p>Stamina потрібна для парирування та багатьох активних здібностей. Її витрата пов’язує сильну дію зараз із можливостями наступного раунду.</p><h2>Дивитися на ресурси разом</h2><p>Три смуги описують різні сторони стану героя. Високий Health не замінює виснажений Guard або Stamina. Спорядження, розвиток і активні ефекти змінюють те, як твій білд працює з кожним ресурсом.</p><p>Пов’язане: <a href=\"06-status-effects.html\">статуси</a>, <a href=\"10-abilities.html\">здібності</a>.</p>"
+      },
+      "en": {
+        "title": "Health, Guard & Stamina",
+        "summary": "Three resources create different kinds of pressure and shape the options available next round.",
+        "body": "<h2>Health</h2><p>Health determines whether a participant remains in the duel. Uncovered attacks and certain effects threaten it directly. Other mechanics let a hunter recover Health within the options provided by the build.</p><h2>Guard</h2><p>Guard supports blocking and the ability to withstand pressure. Wearing down a defensive stance changes the situation even while Health still looks comfortable. A broken Guard makes the exchange more dangerous.</p><h2>Stamina</h2><p>Stamina powers parrying and many active abilities. Spending it connects a strong action now with the options available in the following round.</p><h2>Read them together</h2><p>The three bars describe different aspects of the hunter’s condition. High Health does not replace depleted Guard or Stamina. Equipment, progression, and active effects shape how a build handles each resource.</p><p>Related: <a href=\"06-status-effects.html\">status effects</a> and <a href=\"10-abilities.html\">abilities</a>.</p>"
+      }
+    },
+    {
+      "slug": "06-status-effects",
+      "group": "combat",
+      "ua": {
+        "title": "Статуси та взаємодії",
+        "summary": "Наслідки дії можуть залишатися після удару й змінювати подальший бій.",
+        "body": "<h2>Раунди пов’язані між собою</h2><p>Статуси продовжують впливати на учасників після завершення окремої дії. Це може бути тривала шкода, відновлення ресурсу або зміна бойових можливостей. Важливо бачити, який ефект активний і що він означає для поточного стану героя.</p><h2>Приклад: Bleed</h2><p>Кровотеча створює тиск у часі. Її застосування й посилення можуть бути частиною поєднання здібностей, перків і зброї. Це додає дуелі наслідків, які не вичерпуються одним прямим ударом.</p><h2>Білд як набір взаємодій</h2><p>Деякі ефекти пов’язані з успішною атакою, блоком або парируванням. Інші допомагають підтримувати ресурси. Разом вони створюють характер героя: важливе поєднання інструментів, а не лише наявність окремого сильного бонусу.</p><p>Іконки й <a href=\"07-battle-log.html\">журнал</a> допомагають простежити ці наслідки. Пояснення механік можна знайти у <a href=\"18-codex.html\">Codex</a>.</p>"
+      },
+      "en": {
+        "title": "Status effects & interactions",
+        "summary": "An action can have lasting consequences that change how the fight develops.",
+        "body": "<h2>Rounds are connected</h2><p>Status effects keep influencing participants after an individual action has ended. They can deal damage over time, restore a resource, or change combat capabilities. Recognizing an active effect helps you understand the hunter’s current condition.</p><h2>An example: Bleed</h2><p>Bleeding creates pressure over time. Applying and strengthening it can be part of a combination of abilities, perks, and weapons. Its consequences extend beyond a single direct hit.</p><h2>A build is a set of interactions</h2><p>Some effects respond to a successful attack, block, or parry. Others help sustain resources. Together they give a hunter a distinctive style: combinations matter alongside individual bonuses.</p><p>Icons and the <a href=\"07-battle-log.html\">battle log</a> help track those consequences. The <a href=\"18-codex.html\">Codex</a> explains the mechanics.</p>"
+      }
+    },
+    {
+      "slug": "07-battle-log",
+      "group": "combat",
+      "ua": {
+        "title": "Бойовий журнал",
+        "summary": "Зворотний зв’язок, який допомагає пов’язати рішення з результатом.",
+        "body": "<h2>Побачити, що відбулося</h2><p>Журнал описує дії учасників, напрямки ударів, зміну ресурсів і спрацювання ефектів. Він доповнює бойову сцену: дає змогу прочитати обмін і розібратися в його наслідках.</p><h2>Кілька причин одного результату</h2><p>Зміна здоров’я може поєднувати прямий удар, здібність, перк або активний статус. Відновлення теж має власну причину. Журнал допомагає помітити ці події й зрозуміти, які інструменти білда взяли участь у раунді.</p><h2>Основа наступного рішення</h2><p>Спостерігаючи за обміном, ти дізнаєшся про вибір ворога та роботу власного героя. Це важлива частина дуелі з адаптивним супротивником: обидва учасники змінюють свої оцінки на основі досвіду.</p><p>Пов’язане: <a href=\"02-combat.html\">хід дуелі</a>, <a href=\"14-adaptive-opponents.html\">адаптивні супротивники</a>.</p>"
+      },
+      "en": {
+        "title": "The battle log",
+        "summary": "Feedback that helps connect a decision with its outcome.",
+        "body": "<h2>See what happened</h2><p>The log describes actions, attack directions, resource changes, and triggered effects. It complements the battle scene by letting you read an exchange and understand its consequences.</p><h2>Several causes, one outcome</h2><p>A Health change can involve a direct attack, an ability, a perk, or an active status. Recovery also has a cause. The log helps reveal which parts of your build took part in the round.</p><h2>A basis for the next decision</h2><p>Observing the exchange teaches you about the opponent’s choices and your own hunter. That is part of a duel with an adaptive opponent: both participants update their understanding through experience.</p><p>Related: <a href=\"02-combat.html\">the flow of a duel</a> and <a href=\"14-adaptive-opponents.html\">adaptive opponents</a>.</p>"
+      }
+    },
+    {
+      "slug": "08-progression",
+      "group": "character",
+      "ua": {
+        "title": "Розвиток героя",
+        "summary": "Посилення персонажа та пошук власного способу грати йдуть поруч.",
+        "body": "<h2>З чого складається білд</h2><p>Героя формують атрибути, спорядження, пасивні перки й активні здібності. Кожна складова дає власний тип можливостей, а їхнє поєднання визначає сильні й слабкі сторони персонажа.</p><h2>Різні форми розвитку</h2><ul><li><a href=\"09-attributes.html\">Атрибути</a> задають основу бойових можливостей.</li><li><a href=\"10-abilities.html\">Здібності</a> дають активні інструменти для конкретного моменту.</li><li><a href=\"11-perks.html\">Перки</a> підтримують стиль постійними бонусами та реакціями.</li><li><a href=\"12-equipment.html\">Спорядження</a> змінює параметри й доступні взаємодії.</li></ul><h2>Досвід героя й досвід гравця</h2><p>Підвищення рівня відкриває рішення щодо подальшого розвитку. Водночас зростає твоє розуміння дуелі: чому дія спрацювала, чого бракувало ресурсові та як окремі частини білда допомагають одна одній.</p><p>Цінність нової знахідки чи можливості визначається її місцем у поточному стилі гри.</p>"
+      },
+      "en": {
+        "title": "Character progression",
+        "summary": "Growing stronger and finding your own way to play go hand in hand.",
+        "body": "<h2>What makes a build</h2><p>Attributes, equipment, passive perks, and active abilities shape a hunter. Each provides a different kind of option; their combination defines the character’s strengths and weaknesses.</p><h2>Different kinds of growth</h2><ul><li><a href=\"09-attributes.html\">Attributes</a> provide the foundation for combat capabilities.</li><li><a href=\"10-abilities.html\">Abilities</a> are active tools for a particular moment.</li><li><a href=\"11-perks.html\">Perks</a> support a style through bonuses and reactions.</li><li><a href=\"12-equipment.html\">Equipment</a> changes stats and available interactions.</li></ul><h2>The hunter’s experience and yours</h2><p>Leveling up creates decisions about further development. Your understanding of a duel grows too: why an action worked, where a resource fell short, and how the parts of a build support one another.</p><p>A new find or option gains its value from its place in the way you currently play.</p>"
+      }
+    },
+    {
+      "slug": "09-attributes",
+      "group": "character",
+      "ua": {
+        "title": "Чотири атрибути",
+        "summary": "Strength, Fortitude, Mastery і Focus задають основу розвитку героя.",
+        "body": "<h2>Основа бойових можливостей</h2><p>Атрибути впливають на похідні бойові параметри та можливості розвитку. Вони працюють разом зі спорядженням і ефектами: окреме значення не описує весь білд.</p><h2>Чотири напрями розвитку</h2><ul><li><strong>Strength</strong> пов’язана із силою атак і тиском на супротивника.</li><li><strong>Fortitude</strong> підтримує життєздатність і витримку героя.</li><li><strong>Mastery</strong> збільшує запас Stamina та підтримує її відновлення.</li><li><strong>Focus</strong> впливає на ймовірність критичного удару.</li></ul><h2>Оцінювати в контексті</h2><p>Розвиток варто читати разом із тим, що дає конкретна зброя, які перки вже є та якими здібностями користується герой. Атрибути задають основу; повний характер персонажа проявляється в дуелі.</p><p>Пов’язане: <a href=\"08-progression.html\">розвиток героя</a> та <a href=\"13-weapon-styles.html\">стилі зброї</a>.</p>"
+      },
+      "en": {
+        "title": "The four attributes",
+        "summary": "Strength, Fortitude, Mastery, and Focus provide the foundation for character development.",
+        "body": "<h2>The foundation of a hunter</h2><p>Attributes influence derived combat stats and development options. They work alongside equipment and effects: a single value does not describe the entire build.</p><h2>Four directions of growth</h2><ul><li><strong>Strength</strong> relates to the force of attacks and pressure on an opponent.</li><li><strong>Fortitude</strong> supports a hunter’s resilience and ability to endure.</li><li><strong>Mastery</strong> increases Stamina and supports its recovery.</li><li><strong>Focus</strong> influences the chance of a critical hit.</li></ul><h2>Read them in context</h2><p>Consider development alongside your weapon, existing perks, and chosen abilities. Attributes set the foundation; the character of a build emerges in the duel.</p><p>Related: <a href=\"08-progression.html\">character progression</a> and <a href=\"13-weapon-styles.html\">weapon styles</a>.</p>"
+      }
+    },
+    {
+      "slug": "10-abilities",
+      "group": "character",
+      "ua": {
+        "title": "Активні здібності",
+        "summary": "Інструменти, які ти обираєш для конкретної ситуації в дуелі.",
+        "body": "<h2>Ще одне рішення в раунді</h2><p>Здібність доповнює звичайні атаку й захист. Вона може посилювати тиск, накладати ефект, допомагати з ресурсами або підтримувати оборону. Вибір має враховувати стан героя та супротивника.</p><h2>Вартість і готовність</h2><p>Багато здібностей витрачають Stamina та мають період відновлення. Частина потребує вибору напрямку, інші застосовуються без нього. Важливо читати умови конкретної здібності: натискання не замінює виконання потрібних умов у раунді.</p><h2>Інструмент для свого стилю</h2><p>У грі є здібності, пов’язані з кровотечею, відновленням і тиском на захист. Їхня цінність залежить від того, як вони поєднуються зі зброєю та перками. На скриншотах можна побачити, зокрема, Bloodletting і Blood Renewal.</p><p>Пов’язане: <a href=\"05-resources.html\">ресурси</a>, <a href=\"06-status-effects.html\">статуси</a>, <a href=\"11-perks.html\">перки</a>.</p>"
+      },
+      "en": {
+        "title": "Active abilities",
+        "summary": "Tools you choose for a particular situation in a duel.",
+        "body": "<h2>Another decision in a round</h2><p>An ability complements ordinary attacking and defending. It can increase pressure, apply an effect, help sustain resources, or support defense. Its value depends on the condition of both participants.</p><h2>Cost and readiness</h2><p>Many abilities use Stamina and have a cooldown. Some require a direction; others do not. Read the conditions of the individual ability: selecting it does not replace meeting its requirements during the exchange.</p><h2>A tool for your style</h2><p>The game includes abilities connected to bleeding, recovery, and pressure on defenses. Their value comes from how they fit with weapons and perks. Bloodletting and Blood Renewal are among the abilities visible in the screenshots.</p><p>Related: <a href=\"05-resources.html\">resources</a>, <a href=\"06-status-effects.html\">status effects</a>, and <a href=\"11-perks.html\">perks</a>.</p>"
+      }
+    },
+    {
+      "slug": "11-perks",
+      "group": "character",
+      "ua": {
+        "title": "Пасивні перки",
+        "summary": "Бонуси й реакції, які підтримують обраний стиль бою.",
+        "body": "<h2>Постійна частина білда</h2><p>Перки доповнюють героя без окремого вибору дії в кожному раунді. Одні змінюють бойові можливості, інші реагують на події — наприклад, успішну атаку чи парирування.</p><h2>Умови мають значення</h2><p>Реактивний перк проявляється, коли відбувається потрібна подія. Його користь пов’язана зі стилем, спорядженням і рішеннями героя. Перк, який підтримує певний тип зброї або захисту, потрібно оцінювати саме в такому контексті.</p><h2>Взаємодії замість окремих бонусів</h2><p>Перки допомагають надати білду характер: витримувати тиск, розвивати кровотечу або підтримувати можливості парирування. Приклади перків видно на екрані розвитку героя; їхні ефекти можна простежити в бойовому журналі.</p><p>Пов’язане: <a href=\"08-progression.html\">розвиток</a>, <a href=\"13-weapon-styles.html\">зброя</a> та <a href=\"07-battle-log.html\">бойовий журнал</a>.</p>"
+      },
+      "en": {
+        "title": "Passive perks",
+        "summary": "Bonuses and reactions that support a chosen fighting style.",
+        "body": "<h2>A lasting part of the build</h2><p>Perks complement a hunter without requiring a separate action every round. Some change combat capabilities; others react to events such as a successful attack or parry.</p><h2>Conditions matter</h2><p>A reactive perk becomes relevant when its triggering event occurs. Its usefulness depends on the hunter’s style, equipment, and decisions. A perk supporting a particular weapon or defense should be considered in that context.</p><h2>Interactions give a build character</h2><p>Perks can help a hunter withstand pressure, develop bleeding effects, or support parrying. The progression screen shows examples, while the battle log helps reveal their effects in an exchange.</p><p>Related: <a href=\"08-progression.html\">progression</a>, <a href=\"13-weapon-styles.html\">weapons</a>, and the <a href=\"07-battle-log.html\">battle log</a>.</p>"
+      }
+    },
+    {
+      "slug": "12-equipment",
+      "group": "equipment",
+      "ua": {
+        "title": "Спорядження та знахідки",
+        "summary": "Предмети змінюють можливості героя й дають привід переглянути звичний білд.",
+        "body": "<h2>Більше, ніж число шкоди</h2><p>Зброя визначає доступні бойові можливості й підтримує різні стилі атаки та захисту. Інше спорядження доповнює ресурси, параметри й ефекти героя.</p><h2>Вибір у контексті білда</h2><p>Предмети відрізняються властивостями та рідкістю. Важливо зрозуміти, що саме змінить знахідка: посилить знайому тактику, закриє слабку сторону або підтримає інше поєднання здібностей і перків.</p><p>Порівняння має враховувати весь комплект. Окремий бонус набуває значення через те, що вже вміє герой.</p><h2>Речі як частина світу</h2><p>Іменоване спорядження має власний образ і короткий художній опис. Воно додає світу характеру без потреби одразу знати історію кожної знахідки.</p><p>Далі: <a href=\"13-weapon-styles.html\">стилі зброї</a> та <a href=\"08-progression.html\">розвиток героя</a>.</p>"
+      },
+      "en": {
+        "title": "Equipment & discoveries",
+        "summary": "Items change a hunter’s options and give you reasons to reconsider a familiar build.",
+        "body": "<h2>More than a damage number</h2><p>Weapons define combat options and support different approaches to attack and defense. Other equipment complements a hunter’s resources, stats, and effects.</p><h2>Choose in the context of a build</h2><p>Items differ in properties and rarity. Consider what a find changes: strengthening familiar tactics, covering a weakness, or supporting a different combination of abilities and perks.</p><p>Compare the whole loadout. An individual bonus gains meaning through what the hunter can already do.</p><h2>Objects belong to the world</h2><p>Named equipment has its own visual identity and a short piece of descriptive writing. It gives the world character while leaving the discoveries around each item to the game.</p><p>Continue with <a href=\"13-weapon-styles.html\">weapon styles</a> and <a href=\"08-progression.html\">character progression</a>.</p>"
+      }
+    },
+    {
+      "slug": "13-weapon-styles",
+      "group": "equipment",
+      "ua": {
+        "title": "Стилі зброї",
+        "summary": "Різні поєднання зброї підтримують різний характер дуелі.",
+        "body": "<h2>Одноручна зброя та щит</h2><p>Таке поєднання підтримує оборонні можливості й роботу зі стійкістю захисту. Конкретне покриття та ефекти залежать від обраного спорядження й розвитку героя.</p><h2>Дворучна зброя</h2><p>Дворучні варіанти роблять акцент на силі ударів і тиску. Додаткові можливості визначає конкретний предмет та взаємодії білда. Black Maul на скриншоті інвентаря — один із прикладів такого образу зброї.</p><h2>Парна зброя</h2><p>Парна зброя підтримує власні поєднання атак, парирування та реактивних ефектів. Її характер розкривається разом із перками й керуванням Stamina.</p><h2>Стиль складається з кількох частин</h2><p>Тип зброї задає напрям, але не описує героя повністю. Атрибути, здібності та перки можуть посилювати його переваги або допомагати з обмеженнями.</p><p>Пов’язане: <a href=\"04-block-parry.html\">Block і Parry</a>, <a href=\"11-perks.html\">перки</a>.</p>"
+      },
+      "en": {
+        "title": "Weapon styles",
+        "summary": "Different weapon combinations support different approaches to a duel.",
+        "body": "<h2>One-handed weapon and shield</h2><p>This combination supports defensive options and the management of Guard. Exact coverage and effects depend on equipment and character development.</p><h2>Two-handed weapons</h2><p>Two-handed options emphasize the force of attacks and pressure. The specific item and build interactions define additional capabilities. The inventory screenshot shows Black Maul as one example of this weapon identity.</p><h2>Dual weapons</h2><p>Dual weapons support their own combinations of attacks, parrying, and reactive effects. Their character emerges alongside perks and Stamina management.</p><h2>A style has several parts</h2><p>The weapon type sets a direction without describing the entire hunter. Attributes, abilities, and perks can strengthen its advantages or help with its limitations.</p><p>Related: <a href=\"04-block-parry.html\">Block and Parry</a> and <a href=\"11-perks.html\">perks</a>.</p>"
+      }
+    },
+    {
+      "slug": "14-adaptive-opponents",
+      "group": "opponents",
+      "ua": {
+        "title": "Супротивники, які вчаться",
+        "summary": "Досвід попередніх обмінів впливає на подальші рішення ворога.",
+        "body": "<h2>Дуель розвивається</h2><p>Супротивник враховує дії, які вже відбулися, та їхні наслідки. Повторювані напрямки, знайомі прийоми й результати взаємодій поступово формують досвід.</p><p>Поточна ситуація теж важлива: стан ресурсів і доступні можливості змінюють цінність рішень. Тому поведінку ворога потрібно спостерігати в контексті конкретного бою.</p><h2>Пам’ять кампанії</h2><p>Знання про звички гравця зберігаються між сесіями в межах кампанії. Завершення однієї дуелі не означає, що весь досвід взаємодій зник.</p><h2>Гравець теж навчається</h2><p>Адаптація створює взаємний процес. Ворог здобуває досвід твоїх дій, а ти через бойову сцену й журнал бачиш наслідки його вибору. Зміна звички або інший білд дають цьому обміну новий напрям.</p><p>Пов’язане: <a href=\"07-battle-log.html\">бойовий журнал</a> та <a href=\"03-directions.html\">напрямки</a>.</p>"
+      },
+      "en": {
+        "title": "Opponents that learn",
+        "summary": "Experience from previous exchanges influences an opponent’s later decisions.",
+        "body": "<h2>The duel develops</h2><p>An opponent takes completed actions and their consequences into account. Repeated directions, familiar moves, and interaction outcomes gradually form experience.</p><p>The present situation matters too: resources and available options change the value of decisions. Observe the opponent in the context of the current fight.</p><h2>Campaign memory</h2><p>Knowledge about the player’s habits persists between sessions within a campaign. The end of an individual duel does not erase all experience of those interactions.</p><h2>The player learns too</h2><p>Adaptation creates a mutual process. The enemy gains experience from your actions; the battle scene and log let you see the consequences of its choices. A changed habit or a different build gives the exchange a new direction.</p><p>Related: the <a href=\"07-battle-log.html\">battle log</a> and <a href=\"03-directions.html\">directions</a>.</p>"
+      }
+    },
+    {
+      "slug": "15-exploration",
+      "group": "world",
+      "ua": {
+        "title": "Дослідження клубу",
+        "summary": "Карта поєднує бої, зустрічі та моменти підготовки в одну подорож.",
+        "body": "<h2>Простір між дуелями</h2><p>Герой переміщується картою пов’язаних місць. Доступні маршрути визначають, куди можна піти зараз; дослідження відкриває нові зустрічі та можливості продовжити шлях.</p><h2>Різний темп подорожі</h2><p>Бойові зустрічі чергуються з діалогами, знахідками, торгівлею й відпочинком. Це створює час для розвитку героя та знайомства зі світом між напруженими дуелями.</p><h2>Підготовка теж є рішенням</h2><p>Перед наступною зустріччю можна переглянути спорядження й доступні інструменти героя. Новий предмет або можливість розвитку впливають на те, з яким підходом ти повертаєшся в бій.</p><p>Деталі маршрутів і розв’язання місцевих історій залишаються в грі.</p><p>Пов’язане: <a href=\"16-encounters.html\">зустрічі й діалоги</a>, <a href=\"12-equipment.html\">спорядження</a>.</p>"
+      },
+      "en": {
+        "title": "Exploring the club",
+        "summary": "The map connects fights, encounters, and preparation into a single journey.",
+        "body": "<h2>The space between duels</h2><p>The hunter moves across a map of connected places. Available routes determine where you can go at a given moment; exploration reveals encounters and opportunities to continue.</p><h2>A changing rhythm</h2><p>Combat encounters alternate with dialogue, discoveries, trading, and rest. This creates room for character development and getting to know the world between tense duels.</p><h2>Preparation is a decision</h2><p>Before another encounter, you can reconsider equipment and the tools available to the hunter. A new item or development option can change the approach you bring back into combat.</p><p>Route details and the resolutions of local stories remain discoveries for the game.</p><p>Related: <a href=\"16-encounters.html\">encounters and dialogue</a> and <a href=\"12-equipment.html\">equipment</a>.</p>"
+      }
+    },
+    {
+      "slug": "16-encounters",
+      "group": "world",
+      "ua": {
+        "title": "Зустрічі та діалоги",
+        "summary": "Мешканці клубу й знайдені тексти поступово надають подорожі змісту.",
+        "body": "<h2>Побачити світ через його мешканців</h2><p>Зустрічі доповнюють бойовий досвід іншими сторонами життя клубу. Персонажі, їхні слова й навколишні деталі допомагають відчути, що перед тобою місце з власним минулим.</p><h2>Діалог у контексті подорожі</h2><p>Розмова може бути пов’язана з поточною зустріччю, місцевою історією або подальшим дослідженням. Художня сцена й ігрові можливості працюють разом.</p><p>Скриншот з Experiment 403 показує формат такої зустрічі: ілюстрацію місця, портрет і текст персонажа.</p><h2>Залишити відкриття гравцеві</h2><p>Тут немає повних діалогів, послідовностей відповідей або розв’язок квестів. Найкраще знайомитися з цими історіями під час власної подорожі.</p><p>Пов’язане: <a href=\"17-world.html\">світ і атмосфера</a>, <a href=\"15-exploration.html\">дослідження</a>.</p>"
+      },
+      "en": {
+        "title": "Encounters & dialogue",
+        "summary": "The club’s inhabitants and discovered texts gradually give the journey meaning.",
+        "body": "<h2>Meet the world through its inhabitants</h2><p>Encounters complement combat with other aspects of life in the club. Characters, their words, and surrounding details help establish a place with a past of its own.</p><h2>Dialogue within the journey</h2><p>A conversation can connect to an encounter, a local story, or further exploration. Narrative scenes and gameplay opportunities work together.</p><p>The Experiment 403 screenshot illustrates this format: an environment, a portrait, and the character’s text.</p><h2>Leave discoveries to the player</h2><p>This guide does not reproduce complete conversations, answer sequences, or quest resolutions. Those stories are best discovered through your own journey.</p><p>Related: <a href=\"17-world.html\">the world and atmosphere</a> and <a href=\"15-exploration.html\">exploration</a>.</p>"
+      }
+    },
+    {
+      "slug": "17-world",
+      "group": "world",
+      "ua": {
+        "title": "Світ і атмосфера",
+        "summary": "Занепалий орден мисливців, готичні простори та сила, яка залишає слід.",
+        "body": "<h2>Місце з минулим</h2><p>Carnage Club виріс із занепалого ордену мисливців. Архітектура, речі й зустрічі зберігають сліди його попереднього життя. Герой поступово знайомиться з цим місцем через власну подорож.</p><h2>Готична візуальна мова</h2><p>Темні простори, старі ритуальні мотиви, стримане золото й криваві акценти задають тон. Ілюстровані сцени та персонажі підтримують відчуття небезпечного світу з власними правилами.</p><h2>Механіки належать цьому світові</h2><p>Зброя, криваві здібності та бойовий досвід пов’язані з образом мисливця. Вони допомагають сприймати розвиток героя як частину подорожі, а не окремий набір чисел.</p><p>Причини подій, приховані зв’язки й подальша доля персонажів залишаються для гри.</p><p>Пов’язане: <a href=\"16-encounters.html\">зустрічі</a> та <a href=\"01-gdd.html\">знайомство з проєктом</a>.</p>"
+      },
+      "en": {
+        "title": "The world & atmosphere",
+        "summary": "A fallen hunters’ order, gothic spaces, and a power that leaves its mark.",
+        "body": "<h2>A place with a past</h2><p>Carnage Club grew from a fallen hunters’ order. Its architecture, objects, and encounters retain traces of an earlier life. The hunter comes to know the place through the journey.</p><h2>A gothic visual language</h2><p>Dark spaces, old ritual motifs, restrained gold, and blood-red accents establish the tone. Illustrated scenes and characters support a dangerous world with rules of its own.</p><h2>The mechanics belong to the world</h2><p>Weapons, blood abilities, and combat experience connect to the identity of a hunter. Character development becomes part of the journey rather than an isolated set of numbers.</p><p>The causes of events, hidden connections, and the characters’ later fates remain discoveries for the game.</p><p>Related: <a href=\"16-encounters.html\">encounters</a> and <a href=\"01-gdd.html\">the project introduction</a>.</p>"
+      }
+    },
+    {
+      "slug": "18-codex",
+      "group": "help",
+      "ua": {
+        "title": "Підказки та Codex",
+        "summary": "Довідка допомагає розуміти правила й самостійно приймати рішення.",
+        "body": "<h2>Розуміти новий інструмент</h2><p>Підказки та Codex пояснюють бойові ресурси, дії й ефекти. Вони дають контекст для прочитаного в інтерфейсі: що означає параметр, яку роль має захист і чому певний ефект важливий.</p><h2>Пояснення та спостереження</h2><p>Довідка розкриває значення механіки, а бойовий журнал показує її участь у конкретному обміні. Разом вони допомагають пов’язати правила з власним досвідом гри.</p><h2>З чого почати читання Wiki</h2><p>Для загального знайомства достатньо <a href=\"01-gdd.html\">огляду гри</a>. Якщо цікавить дуель, прочитай про <a href=\"02-combat.html\">хід бою</a> та <a href=\"05-resources.html\">ресурси</a>. Для розвитку героя є окремі сторінки про <a href=\"08-progression.html\">білд</a> і <a href=\"12-equipment.html\">спорядження</a>.</p><p>Цей довідник пояснює характер проєкту й залишає сюжетні відкриття для власного проходження.</p>"
+      },
+      "en": {
+        "title": "Hints & the Codex",
+        "summary": "Reference material helps you understand the rules and make your own decisions.",
+        "body": "<h2>Understand a new tool</h2><p>Hints and the Codex explain combat resources, actions, and effects. They provide context for what you see in the interface: what a stat means, the role of a defense, and why an effect matters.</p><h2>Explanation and observation</h2><p>Reference material explains a mechanic; the battle log shows its part in a particular exchange. Together they connect the rules to your own experience of playing.</p><h2>Where to begin</h2><p>Start with the <a href=\"01-gdd.html\">game overview</a>. For duels, read about <a href=\"02-combat.html\">combat</a> and <a href=\"05-resources.html\">resources</a>. Character development has its own pages on <a href=\"08-progression.html\">builds</a> and <a href=\"12-equipment.html\">equipment</a>.</p><p>This guide explains the character of the project while leaving narrative discoveries for your own playthrough.</p>"
+      }
+    }
+  ]
+}

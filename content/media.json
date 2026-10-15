@@ -1,0 +1,57 @@
+{
+  "kitty": {
+    "name": "Kitty Sort: Twisted Tails",
+    "store": "https://apps.apple.com/us/app/kitty-sort-twisted-tails/id6504183751",
+    "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f1/de/b0/f1deb058-1616-d1d9-6f6a-db1e295b0104/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    "screens": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/e4/78/23/e4782303-6981-66ac-6522-cfdc5907c73f/sort_3_screen_v2_a_en_1242x2688.jpg/320x480bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/2e/ee/81/2eee811b-9497-1a68-2471-e2024afe5fbf/sort_3_screen_v7_b_en_1242x2688.jpg/320x480bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/dd/ea/bf/ddeabfcd-3913-39fc-5170-a68ff03bc148/sort_3_screen_v2_c_en_1242x2688.jpg/320x480bb.jpg"
+    ],
+    "source": "https://apps.apple.com/us/app/kitty-sort-twisted-tails/id6504183751",
+    "video": "_KtVNJip3S8",
+    "video_source": "https://www.youtube.com/watch?v=_KtVNJip3S8",
+    "video_origin": "https://play.google.com/store/apps/details?id=org.smapps.sort",
+    "full_screens": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/e4/78/23/e4782303-6981-66ac-6522-cfdc5907c73f/sort_3_screen_v2_a_en_1242x2688.jpg/900x1600bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/2e/ee/81/2eee811b-9497-1a68-2471-e2024afe5fbf/sort_3_screen_v7_b_en_1242x2688.jpg/900x1600bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/dd/ea/bf/ddeabfcd-3913-39fc-5170-a68ff03bc148/sort_3_screen_v2_c_en_1242x2688.jpg/900x1600bb.jpg"
+    ]
+  },
+  "scatter": {
+    "name": "Scatter Slots",
+    "store": "https://apps.apple.com/us/app/scatter-slots-slot-machines/id944158857",
+    "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7d/a4/5f/7da45f65-25d0-8c7e-95d4-36b910ee8502/AppIcon-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg",
+    "screens": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/1f/c9/74/1fc9746b-a9ec-cb56-a306-1bd324e99a32/PM-22831_iPhone_6.7_-__1290_x_2796_4.jpg/320x480bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/db/6d/b5/db6db545-8330-d080-4e0b-03c5c502621d/PM-24440_1290_x_2796_5.jpg/320x480bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/01/99/76/01997625-b376-5635-09a7-76590b69cdc1/PM-25233_1290_x_2796_2.jpg/320x480bb.jpg"
+    ],
+    "video": "_0tD6613Cs8",
+    "video_source": "https://www.youtube.com/watch?v=_0tD6613Cs8",
+    "source": "https://apps.apple.com/us/app/scatter-slots-slot-machines/id944158857",
+    "full_screens": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/1f/c9/74/1fc9746b-a9ec-cb56-a306-1bd324e99a32/PM-22831_iPhone_6.7_-__1290_x_2796_4.jpg/900x1600bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/db/6d/b5/db6db545-8330-d080-4e0b-03c5c502621d/PM-24440_1290_x_2796_5.jpg/900x1600bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/01/99/76/01997625-b376-5635-09a7-76590b69cdc1/PM-25233_1290_x_2796_2.jpg/900x1600bb.jpg"
+    ]
+  },
+  "azzl": {
+    "name": "AZZL",
+    "store": "https://apps.apple.com/us/app/azzl/id640484311",
+    "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple20/v4/02/e3/d3/02e3d374-14f1-d98e-910b-2559a0905398/pr_source.png/512x512bb.jpg",
+    "screens": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple30/v4/ed/b7/13/edb7133b-ef84-b966-099a-3ebf66d2ff44/pr_source.png/406x228bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple20/v4/91/64/67/9164676e-3633-e121-fbe7-a34ee6d0030c/pr_source.png/406x228bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple20/v4/b0/e6/3d/b0e63d2a-8737-de14-92dc-c80e49b09367/pr_source.png/406x228bb.png"
+    ],
+    "video": "zwV3EBCQ7aU",
+    "video_source": "https://www.youtube.com/watch?v=zwV3EBCQ7aU",
+    "source": "https://apps.apple.com/us/app/azzl/id640484311",
+    "full_screens": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple30/v4/ed/b7/13/edb7133b-ef84-b966-099a-3ebf66d2ff44/pr_source.png/1280x720bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple20/v4/91/64/67/9164676e-3633-e121-fbe7-a34ee6d0030c/pr_source.png/1280x720bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple20/v4/b0/e6/3d/b0e63d2a-8737-de14-92dc-c80e49b09367/pr_source.png/1280x720bb.png"
+    ]
+  }
+}
