@@ -185,7 +185,10 @@ p{color:var(--muted)}
 .case-hero h1{font-size:clamp(65px,7vw,96px);margin:18px 0;line-height:.98}
 .case-tagline{font-size:28px;line-height:1.3;color:#dedbec;letter-spacing:-.035em;margin-top:28px}
 .case-hero .actions{margin-top:28px}
-.development-status{display:flex;align-items:center;gap:9px;font-size:14px;margin-top:24px}
+.case-purchase-note{font-size:14px;line-height:1.7;margin-top:12px}
+.case-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px}
+.case-links .video-link{flex:1 1 230px;margin-top:0}
+.case-links .text-link{font-size:16px;display:inline-block;padding-block:4px}
 .case-stage{position:relative;min-width:0;height:540px}
 .case-stage .shot{position:absolute;width:53%;max-width:270px}
 .case-menu{left:0;top:18px;transform:rotate(-5deg)}
@@ -193,7 +196,7 @@ p{color:var(--muted)}
 .case-battle{right:0;top:70px;transform:rotate(5deg)}
 .case-battle:hover{transform:rotate(5deg) translateY(-5px)}
 .case-facts{border-block:1px solid var(--line);padding-block:25px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.case-facts span{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.case-facts>div>span{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .case-facts strong{font-size:14px;font-weight:500}
 .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:35px;margin-top:40px}
 .feature-number{font-size:14px;letter-spacing:.1em;color:var(--accent)}
@@ -560,8 +563,7 @@ body { font-size:18px; }
 .footer-links a { font-size:16px; }
 .footer small { font-size:14px; }
 .back-link { font-size:16px; }
-.development-status { font-size:14px; line-height:1.7; }
-.case-facts span { font-size:14px; }
+.case-facts>div>span { font-size:14px; }
 .case-facts strong { font-size:16px; }
 .feature-number,.game-gallery figcaption { font-size:14px; }
 .studio-link { align-items:center; gap:22px; }
